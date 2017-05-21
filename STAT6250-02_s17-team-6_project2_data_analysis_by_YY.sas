@@ -43,6 +43,7 @@ footnote1
 footnote2
 "Moreover, we can see that the top four highest rent price of cities are Swiss cities."
 ;
+
 *
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
@@ -56,6 +57,7 @@ data, nor does it attempt to validate data in any way.
 
 Followup Steps: More carefully clean the values of the variable.
 ;
+
 proc freq
         data=cde_2014_analytic_file
     ;
@@ -76,7 +78,6 @@ proc print
 run;
 title;
 footnote;
-
 
 
 *******************************************************************************;
@@ -112,6 +113,7 @@ Limitations: This methodology does not account for schools with missing data,
 nor does it attempt to validate data in any way.
 Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
+
 proc means
         min q1 median q3 max
         data=cde_2014_analytic_file
@@ -122,7 +124,6 @@ proc means
 run;
 title;
 footnote;
-
 
 
 *******************************************************************************;
@@ -142,6 +143,8 @@ footnote1
 
 footnote2
 "Moreover, we can see that the top lowest crime rate of cities are Swiss cities."
+;
+
 *
 Note: This would involve the crime rate, and then we can make a table 
 to see the relationship.
@@ -154,6 +157,7 @@ nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
+
 proc freq
         data=cde_2014_analytic_file
     ;
