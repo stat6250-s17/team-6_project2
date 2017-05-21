@@ -174,8 +174,8 @@ lowest house renting compared to the other months."
 ;
 
 footnote2
-"We can conclude that the months with most expensive house renting is August, January
-and July."
+"We can conclude that the months with most expensive house renting is August, 
+January and July."
 ;
 
 footnote3
