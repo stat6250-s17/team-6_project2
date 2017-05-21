@@ -5,10 +5,13 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding college-preparation trends at CA public K-12 schools
+questions regarding Zillow Rent Index, the median estimated monthly rental 
+price for a given area, and covers multifamily, single family, condominium, 
+and cooperative homes in Zillow’s database, regardless of whether they are 
+currently listed for rent. 
 
-Dataset Name: cde_2014_analytic_file created in external file
-STAT6250-02_s17-team-0_project2_data_preparation.sas, which is assumed to be
+Dataset Name: rentprice_analytic_file created in external file
+STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
 
 See included file for dataset properties
@@ -59,7 +62,7 @@ Followup Steps: More carefully clean the values of the variable.
 ;
 
 proc freq
-        data=cde_2014_analytic_file
+        data=rentprice_analytic_file
     ;
     table
         Avg_rent/ noprint out=Avg_rent_frequency;
@@ -111,12 +114,13 @@ the Beijing and San Francesco observations from the temporary dataset.
 
 Limitations: This methodology does not account for schools with missing data,
 nor does it attempt to validate data in any way.
+
 Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
 
 proc means
         min q1 median q3 max
-        data=cde_2014_analytic_file
+        data=rentprice_analytic_file
     ;
     class
         City
