@@ -53,13 +53,23 @@ outliers."
 ;
 
 *
-Note:
+Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
+to the column of the same name from frpm1516.
 
-Methodology:
+Methodology: When combining frpm1415 with frpm1516 during data preparation,
+take the difference of values of "Percent (%) Eligible Free (K-12)" for each
+school and create a new variable called frpm_rate_change_2014_to_2015. Then,
+use proc sort to create a temporary sorted table in descending by
+frpm_rate_change_2014_to_2015. Finally, use proc print here to display the
+first five rows of the sorted dataset.
 
-Limitations: 
+Limitations: This methodology does not account for schools with missing data,
+nor does it attempt to validate data in any way, like filtering for percentages
+between 0 and 1.
 
-Followup Steps:
+Followup Steps: More carefully clean values in order to filter out any possible
+illegal values, and better handle missing data, e.g., by using a previous year's
+data or a rolling average of previous years' data as a proxy.
 ;
 
 proc freq
@@ -88,8 +98,8 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: Where have rental prices increased in the past six years and where 
-have they remained the same?'
+'Question: Which top 3 area rentals increase fastest in the past five years and 
+which areas increase the lowest?'
 ;
 
 title2
@@ -99,25 +109,34 @@ the overall graph of the rent.'
 ;
 
 footnote1
-"..............................."
+"The house renting of Los Angels, New York and Chicago increase the fastest and
+the house renting of Wichita, Aurora, Laredo increase the lowest. "
 ;
 
 footnote2
-"..............................."
+"We can see that there are bunch of areas keeps increase in a gentle tendency."
 ;
 
 footnote3
-"................................"
+"There are some missing values that needed to be clean out."
 ;
 
 *
-Note:
+Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
+to the column PCTGE1500 from sat15.
 
-Methodology:
+Methodology: Use proc means to compute 5-number summaries of "Percent (%)
+Eligible Free (K-12)" and PCTGE1500. Then use proc format to create formats
+that bin both columns with respect to the proc means output. Then use proc freq
+to create a cross-tab of the two variables with respect to the created formats.
 
-Limitations: 
+Limitations: Even though predictive modeling is specified in the research
+questions, this methodology solely relies on a crude descriptive technique
+by looking at correlations along quartile values, which could be too coarse a
+method to find actual association between the variables.
 
-Followup Steps:
+Followup Steps: A possible follow-up to this approach could use an inferential
+statistical technique like linear regression.
 ;
 
 proc print
@@ -140,8 +159,8 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: Which city or state has the lowest cost per square foot over the years? 
-Have they changed?'
+'Question: During which months or seasons do the house renting decrease overall 
+according to the output?'
 ;
 
 title2
@@ -150,25 +169,38 @@ over the year and observe the reason behind this changed/unchanged variables.'
 ;
 
 footnote1
-"................"
+"Generally speaking, we can see that February, September and Novemember have the 
+lowest house renting compared to the other months."
 ;
 
 footnote2
-".........."
+"We can conclude that the months with most expensive house renting is August, January
+and July."
 ;
 
 footnote3
-"....."
+"There are some missing values in the xls, we need to clean out and run the code 
+more precisely."
 ;
 
 *
-Note:
+Note: This compares the column NUMTSTTAKR from sat15 to the column TOTAL from
+gradaf15.
 
-Methodology:
+Methodology: When combining sat15 and gradaf15 during data preparation, take
+the difference between NUMTSTTAKR in sat15 and TOTAL in gradaf15 for each
+school and create a new variable called excess_sat_takers. Then, use proc sort
+to create a temporary sorted table in descending by excess_sat_takers. Finally,
+use proc print here to display the first 10 rows of the sorted dataset.
 
-Limitations: 
+Limitations: This methodology does not account for schools with missing data,
+nor does it attempt to validate data in any way, like filtering for values
+outside of admissable values.
 
-Followup Steps:
+Followup Steps: More carefully clean the values of variables so that the
+statistics computed do not include any possible illegal values, and better
+handle missing data, e.g., by using a previous year's data or a rolling average
+of previous years' data as a proxy.
 ;
 
 proc print
