@@ -58,9 +58,9 @@ same name from frpm1516.
 
 Methodology: When combining frpm1415 with frpm1516 during data preparation,
 take the difference of values of "Percent (%) Eligible Free (K-12)" for each
-school and create a new variable called frpm_rate_change_2014_to_2015. Then,
+school and create a new variable called price_rate_change_2014_to_2015. Then,
 use proc sort to create a temporary sorted table in descending by
-frpm_rate_change_2014_to_2015. Finally, use proc print here to display the
+price_rate_change_2014_to_2015. Finally, use proc print here to display the
 first five rows of the sorted dataset.
 
 Limitations: This methodology does not account for schools with missing data,
