@@ -37,11 +37,16 @@ and low supply or the opposite. It will also show if there is any interesting
 geographic insights about cities with highest rent - such as 
 coastal cities vs. inland cities.
 
-Methodology:
+Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
+Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
+will sort the data and print only the top 5 cities by the mean variable.
 
-Limitations: 
+Limitations: This output will take in account the average rent price over
+a 2 year period. However, the trends could proceed additiona insights.
+This will not show if rent has been declining in certain cities.
 
-Followup Steps:
+Followup Steps: Possible follow-up steps is to calculate change over month.
+Or compare the average against the last month.
 ;
 
 *******************************************************************************;
@@ -63,11 +68,13 @@ and low supply or the opposite. It will also show if there is any interesting
 geographic insights about cities with highest rent - such as 
 coastal cities vs. inland cities.)
 
-Methodology:
+Methodology: Using PROC Means to caculated the average price across all cities 
+and then use print to see what the average rent is for each month.
 
-Limitations: 
+Limitations: The problem that may occur is if some cities have a different low
+season than other cities.
 
-Followup Steps:
+Followup Steps: A possible follow-up is to find the lowest month for each city.
 ;
 
 
@@ -83,9 +90,13 @@ Rational: This will help indicate which cities are up-and-coming -
 possibly because more people are moving in for job opportunities 
 so demand is increasing as well.
 
-Methodology:
+Methodology: Use PROC Means to caculate an average for 2015 and for 2016
+individually. Then created a new variables that takes the different from
+the two averages. Sort by the difference variable and print the top 3 cities.
 
-Limitations: 
+Limitations: This only looks at increase of price. Looking at highest decrease
+can also reveal interesting insights.
 
-Followup Steps:
+Followup Steps: Print the highest negative difference, not only the highest 
+positive difference.
 ;
