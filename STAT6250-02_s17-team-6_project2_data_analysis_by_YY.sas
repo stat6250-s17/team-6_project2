@@ -29,49 +29,55 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'Research Question: What are the top five highest rent price of cities?' 
+'Research Question: What are the top ten the highest rent price of cities?' 
 ;
 
 title2
-'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that anyone who moves here will think about, because the rent is the largest proportion of people's cost. 
+'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that anyone who moves here will think about, because the rent would be the largest proportion of people's cost.'
 ;
 
 footnote1
-"Of the five schools with the greatest increases in percent eligible for free/reduced-price meals between AY2014-15 and AY2015-16, the increase in percent eligible ranges from about 41% to about 55%."
+"Based on the above output, there are top ten highest rent price of cities that are Lausanne, Zurich, Geneva, Basel, Perth, Nashville, Canberra, Bergen, Luxembourg, Stavanger.'
 ;
 
 footnote2
-"Given the magnitude of these changes, further investigation should be performed to ensure no data errors are involved."
+"Moreover, we can see that the top four highest rent price of cities are Swiss cities."
 ;
-
-footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
-;
-
+*
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
 
 
-Methodology: 
+Methodology: Use PROC SORT extract and sort the Average Rent from the dataset,
+and output the results to a temporary dataset. Use PROC PRINT to print
+the first ten observations from the temporary dataset.
 
-Limitations: 
+Limitations: This methodology does not account for districts with unknown
+data, nor does it attempt to validate data in any way.
 
-Followup Steps:
+Followup Steps: More carefully clean the values of the variable.
 ;
-
-proc print
-        data=cde_2014_analytic_file_sort_frpm(obs=5)
+proc freq
+        data=cde_2014_analytic_file
     ;
-    id
-        School_Name
+    table
+        Avg_rent/ noprint out=Avg_rent_frequency;
+run;
+proc sort
+        data=Avg_rent_frequency out=Avg_rent_sorted
     ;
-    var
-        frpm_rate_change_2014_to_2015
+    by
+        descending count
     ;
 run;
-
+proc print
+        noobs
+        data=Avg_rent_sorted(obs=10)
+    ;
+run;
 title;
 footnote;
+
 
 
 *******************************************************************************;
@@ -79,11 +85,11 @@ footnote;
 *******************************************************************************;
 
 title1
-'Research Question: Where does San Francisco rank in terms of cost of living?'
+'Research Question: Compare the cost of living in Beijing and San Francisco, which one is lower?'
 ;
 
 title2
-'Rationale: We came to San Francisco Bay Area for study. We need to realize how much of living cost to pay. So, I want to know what level about cost in San Francisco to measure I can pay.'
+'Rationale: Beijing is my hometown city, but now I am living in San Francisco Bay Area for study. I want to know how much of living cost to pay in both of cities, and which one is lower.'
 ;
 
 footnote1
@@ -135,45 +141,48 @@ footnote;
 *******************************************************************************;
 
 title1
-'Research Question: Which three of city have the lower crime rate?'
+'Research Question: What are the top ten the lowest crime rate of cities?'
 ;
 title2
-"Rational: Low crime rate is good. The lower the score the safer people feel in this city. By the proportion of crime, we know which cities are more suitable for human habitation."
+"Rational: Low crime rate is good. Lower crime rate makes people feel more safer. By the proportion of crime, we know which cities are more suitable for human habitation."
 ;
 
 footnote1
-"All ten schools listed appear to have extremely large numbers of 12th-graders graduating who have completed the SAT but not the coursework needed to apply for the UC/CSU system"
+"Based on the above output, there are top ten lowest crime rate of cities that are "
 ;
 
 footnote2
-"Given the magnitude of these numbers, further investigation should be performed to ensure no data errors are involved."
-;
-
-footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large numbers of 12th-graders completing only the SAT include lack of access to UC/CSU-preparatory coursework, as well as lack of proper counseling for students early enough in high school to complete all necessary coursework."
-;
-
+"Moreover, we can see that the top lowest crime rate of cities are Swiss cities."
 *
 Note: This would involve the crime rate, and then we can make a table 
 to see the relationship.
 
-Methodology:
+Use PROC SORT extract and sort the Crime_Rating from the dataset,
+and output the results to a temporary dataset. Use PROC PRINT to print
+the first ten observations from the temporary dataset.
 
-Limitations: 
+Limitations: This methodology does not account for districts with unknown
+data, nor does it attempt to validate data in any way.
 
-Followup Steps:
+Followup Steps: More carefully clean the values of the variable.
 ;
-
-proc print
-        data=cde_2014_analytic_file_sort_sat(obs=10)
+proc freq
+        data=cde_2014_analytic_file
     ;
-    id
-        School_Name
+    table
+        Crime_Rating/ noprint out=Crime_Rating_frequency;
+run;
+proc sort
+        data=Crime_Rating_frequency out=Crime_Rating_sorted
     ;
-    var
-        excess_sat_takers
+    by
+        ascending count
     ;
 run;
-
+proc print
+        noobs
+        data=Crime_Rating_sorted(obs=10)
+    ;
+run;
 title;
 footnote;
