@@ -39,15 +39,17 @@ house renting over the year.'
 ;
 
 footnote1
-"................."
+"We can see that New York City is the most expensive to live in from the output."
 ;
 
 footnote2
-"................."
+"We can conclude that Los Angels, San Francisco, Chicago are almost as expensive
+as New York to live in."
 ;
 
 footnote3
-"................."
+"We can see that there are several areas with extreme low rents that form as
+outliers."
 ;
 
 *
