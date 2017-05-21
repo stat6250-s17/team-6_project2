@@ -47,7 +47,6 @@ footnote2
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
 
-
 Methodology: Use PROC SORT extract and sort the Average Rent from the dataset,
 and output the results to a temporary dataset. Use PROC PRINT to print
 the first ten observations from the temporary dataset.
@@ -93,47 +92,37 @@ title2
 ;
 
 footnote1
-"As can be seen, there was an extremely high correlation between student poverty and SAT scores in AY2014-15, with lower-poverty schools much more likely to have high proportions of students with combined SAT scores exceeding 1500."
+"As can be seen, there are the cost of living in Beijing and San Francisco."
 ;
 
 footnote2
-"Possible explanations for this correlation include child-poverty rates tending to be higher at schools with lower overall academic performance and quality of instruction. In addition, students in non-poverish conditions are more likely to have parents able to pay for SAT preparation."
-;
-
-footnote3
-"Given this apparent correlation based on descriptive methodology, further investigation should be performed using inferential methodology to determine the level of statistical significance of the result."
+"the cost of living in San Francisco is higher than Beijing."
 ;
 
 *
 Note: This would involve making either a frequency chart to show 
 the living cost in San Francisco.
 
-Methodology: 
+Methodology:Compute five-number summaries by Cappuccino, Cinema, Wine, 
+Gasoline, Avg Rent and Avg Disposable Income from the dataset, 
+and output the results to a temporary dataset. Use PROC PRINT to print
+the Beijing and San Francesco observations from the temporary dataset.
 
-Limitations: 
-
-Followup Steps:
+Limitations: This methodology does not account for schools with missing data,
+nor does it attempt to validate data in any way.
+Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
-
-proc freq
+proc means
+        min q1 median q3 max
         data=cde_2014_analytic_file
     ;
-    table
-             Percent_Eligible_FRPM_K12
-            *PCTGE1500
-            / missing norow nocol nopercent
-    ;
-        where
-            not(missing(PCTGE1500))
-    ;
-    format
-        Percent_Eligible_FRPM_K12 Percent_Eligible_FRPM_K12_bins.
-        PCTGE1500 PCTGE1500_bins.
+    class
+        City
     ;
 run;
-
 title;
 footnote;
+
 
 
 *******************************************************************************;
@@ -157,14 +146,13 @@ footnote2
 Note: This would involve the crime rate, and then we can make a table 
 to see the relationship.
 
-Use PROC SORT extract and sort the Crime_Rating from the dataset,
-and output the results to a temporary dataset. Use PROC PRINT to print
-the first ten observations from the temporary dataset.
+Methodology: Use PROC PRINT to print the first ten observations from
+the temporary dataset created in the corresponding data-prep file.
 
-Limitations: This methodology does not account for districts with unknown
-data, nor does it attempt to validate data in any way.
+Limitations: This methodology does not account for districts with missing data,
+nor does it attempt to validate data in any way.
 
-Followup Steps: More carefully clean the values of the variable.
+Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
 proc freq
         data=cde_2014_analytic_file
