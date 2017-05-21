@@ -47,6 +47,12 @@ exactly replicated in costlivingNZ.
 exactly replicated in costlivingNZ.
 ;
 
+* environmental setup;
+
+* create output formats;
+
+
+
 * setup environmental parameters;
 %let inputDataset1URL =
 https://github.com/stat6250/team-6_project2/blob/master/data/rentprice2015.xls?raw=true
@@ -55,19 +61,19 @@ https://github.com/stat6250/team-6_project2/blob/master/data/rentprice2015.xls?r
 %let inputDataset1DSN = rentprice2015_raw;
 
 %let inputDataset2URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/rentprice2016.xls?raw=true
+https://github.com/stat6250/team-6_project2/blob/master/data/rentprice2016.xls?raw=true
 ;
 %let inputDataset2Type = XLS;
 %let inputDataset2DSN = rentprice2016_raw;
 
 %let inputDataset3URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/costlivingAM.xls?raw=true
+https://github.com/stat6250/team-6_project2/blob/master/data/costlivingAM.xls?raw=true
 ;
 %let inputDataset3Type = XLS;
 %let inputDataset3DSN = costlivingAM_raw;
 
 %let inputDataset4URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/costlivingNZ.xls?raw=true
+https://github.com/stat6250/team-6_project2/blob/master/data/costlivingNZ.xls?raw=true
 ;
 %let inputDataset4Type = XLS;
 %let inputDataset4DSN = costlivingNZ_raw;
@@ -122,3 +128,156 @@ https://github.com/stat6250/team-0_project2/blob/master/data/costlivingNZ.xls?ra
     &inputDataset4Type.
 )
 
+* sort and check raw datasets for duplicates with respect to their unique ids,
+  removing blank rows, if needed;
+proc sort
+        nodupkey
+        data=rentprice2015_raw
+        dupout=rentprice2015_raw_dups
+        out=rentprice2015_raw_sorted(where=(not(missing(City_Code))))
+    ;
+    by
+        City_Code
+	;
+run;
+proc sort
+        nodupkey
+        data=rentprice2016_raw
+        dupout=rentprice2016_raw_dups
+        out=rentprice2016_raw_sorted(where=(not(missing(City_Code))))
+    ;
+    by
+        City_Code
+	;
+run;
+proc sort
+        nodupkey
+        data=costlivingAM_raw
+        dupout=costlivingAM_raw_dups
+        out=costlivingAM_raw_sorted(where=(not(missing(City))))
+    ;
+    by
+        City
+	;
+run;
+proc sort
+        nodupkey
+        data=costlivingNZ_raw
+        dupout=costlivingNZ_raw_dups
+        out=costlivingNZ_raw_sorted(where=(not(missing(City))))
+    ;
+    by
+        City
+	;
+run;
+
+* combine costlivingAM and costlivingNZ data vertically into a single dataset.
+Data housing_concat;
+
+Data costliving_combined;
+	set costlivingAM_raw_sorted costlivingNZ_raw_sorted;
+run;
+
+* build analytic dataset from raw datasets with the least number of columns and
+minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files;
+data costliving_combined_edited;
+	retain
+		Country
+		City
+		Cappuccino
+		Cinema
+		Wine
+		Gasoline
+		Avg_Rent
+		Avg_Disposable_Income
+		;
+	keep
+		Country
+		City
+		Cappuccino
+		Cinema
+		Wine
+		Gasoline
+		Avg_Rent
+		Avg_Disposable_Income
+		;
+	set costliving_combined;
+run;
+
+*Combine rentprice2015 and rentprice 2016 with macro data horizontally;
+Data rentprice_combined;
+	set rentprice2015_raw;
+	set rentprice2016_raw;
+run;
+
+* build analytic dataset from raw datasets with the least number of columns and
+minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files;
+data rentprice_combined_edited;
+	retain
+		City_Code
+		City
+		Metro
+		County
+		State
+		Population_Rank
+		Jan_15
+		Feb_15
+		Mar_15
+		Apr_15
+		May_15
+		Jun_15
+		Jul_15
+		Aug_15
+		Sep_15
+		Oct_15
+		Nov_15
+		Dec_15
+		Jan_16
+		Feb_16
+		Mar_16
+		Apr_16
+		May_16
+		Jun_16
+		Jul_16
+		Aug_16
+		Sep_16
+		Oct_16
+		Nov_16
+		Dec_16
+		;
+	keep
+		City_Code
+		City
+		Metro
+		County
+		State
+		Population_Rank
+		Jan_15
+		Feb_15
+		Mar_15
+		Apr_15
+		May_15
+		Jun_15
+		Jul_15
+		Aug_15
+		Sep_15
+		Oct_15
+		Nov_15
+		Dec_15
+		Jan_16
+		Feb_16
+		Mar_16
+		Apr_16
+		May_16
+		Jun_16
+		Jul_16
+		Aug_16
+		Sep_16
+		Oct_16
+		Nov_16
+		Dec_16
+		;
+	set rentprice_combined;
+run;
