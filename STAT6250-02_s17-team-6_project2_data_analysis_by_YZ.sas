@@ -53,8 +53,8 @@ outliers."
 ;
 
 *
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column of the same name from frpm1516.
+Note: This compares the column "city" from price.xsl to the column of the
+same name from frpm1516.
 
 Methodology: When combining frpm1415 with frpm1516 during data preparation,
 take the difference of values of "Percent (%) Eligible Free (K-12)" for each
@@ -125,10 +125,10 @@ footnote3
 Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
 to the column PCTGE1500 from sat15.
 
-Methodology: Use proc means to compute 5-number summaries of "Percent (%)
-Eligible Free (K-12)" and PCTGE1500. Then use proc format to create formats
-that bin both columns with respect to the proc means output. Then use proc freq
-to create a cross-tab of the two variables with respect to the created formats.
+Methodology: Use proc means to compute 5-number summaries of population and
+PCTGE1500. Then use proc format to create formatsthat bin both columns with 
+respect to the proc means output. Then use proc freq to create a cross-tab 
+of the two variables with respect to the created formats.
 
 Limitations: Even though predictive modeling is specified in the research
 questions, this methodology solely relies on a crude descriptive technique
@@ -140,13 +140,13 @@ statistical technique like linear regression.
 ;
 
 proc print
-        data=cde_2014_analytic_file_sort_sat(obs=10)
+        data=cde_2014_analytic_file_sort_sat(obs=3)
     ;
     id
-        School_Name
+        City
     ;
     var
-        excess_sat_takers
+        Population
     ;
 run;
 
@@ -207,7 +207,7 @@ proc print
         data=cde_2014_analytic_file_sort_frpm(obs=5)
     ;
     id
-        School_Name
+        City
     ;
     var
         frpm_rate_change_2014_to_2015
