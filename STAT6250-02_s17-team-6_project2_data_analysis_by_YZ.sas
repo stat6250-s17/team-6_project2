@@ -48,7 +48,7 @@ as New York to live in."
 ;
 
 footnote3
-"We can see that there are several areas with extreme low rents that form as
+"We can see that there are several areas with extreme low rents that behaive like
 outliers."
 ;
 
