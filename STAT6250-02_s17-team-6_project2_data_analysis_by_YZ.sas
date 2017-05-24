@@ -73,10 +73,10 @@ data or a rolling average of previous years' data as a proxy.
 ;
 
 proc freq
-        data=cde_2014_analytic_file
+        data=rentprice_2015_analytic_file
     ;
     table
-             Percent_Eligible_FRPM_K12
+            Rentprice_FRPM_2016
             *PCTGE1500
             / missing norow nocol nopercent
     ;
@@ -122,8 +122,8 @@ footnote3
 ;
 
 *
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column PCTGE1500 from sat15.
+Note: This compares the column "city" from rentprice2015
+to the column city from rentprice2016. 
 
 Methodology: Use proc means to compute 5-number summaries of population and
 PCTGE1500. Then use proc format to create formatsthat bin both columns with 
@@ -140,7 +140,7 @@ statistical technique like linear regression.
 ;
 
 proc print
-        data=cde_2014_analytic_file_sort_sat(obs=3)
+        data=rentprice_2015_analytic_file_sort_sat(obs=3)
     ;
     id
         City
@@ -187,10 +187,10 @@ more precisely."
 Note: This compares the column for each month from rentprice15 to the column TOTAL from
 rentprice16.
 
-Methodology: When combining sat15 and rentpricef15 during data preparation, take
-the difference between NUMTSTTAKR in sat15 and TOTAL in gradaf15 for each
-school and create a new variable called excess_sat_takers. Then, use proc sort
-to create a temporary sorted table in descending by excess_sat_takers. Finally,
+Methodology: When combining rentprice15 and rentpricef16 during data preparation, take
+the difference between houserenting for each month in 2015 and TOTAL in 2016 for each
+city and create a new variable called rentprice_rate_change. Then, use proc sort
+to create a temporary sorted table in descending by rentprice_rate_change. Finally,
 use proc print here to display the first 10 rows of the sorted dataset.
 
 Limitations: This methodology does not account for schools with missing data,
@@ -204,13 +204,13 @@ of previous years' data as a proxy.
 ;
 
 proc print
-        data=cde_2014_analytic_file_sort_frpm(obs=5)
+        data=cde_2016_analytic_file_sort_frpm(obs=5)
     ;
     id
         City
     ;
     var
-        frpm_rate_change_2014_to_2015
+        rentprice_rate_change_2015_to_2016
     ;
 run;
 
