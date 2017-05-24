@@ -48,22 +48,22 @@ as New York to live in."
 ;
 
 footnote3
-"We can see that there are several areas with extreme low rents that form as
+"We can see that there are several areas with extreme low rents that behaive like
 outliers."
 ;
 
 *
 Note: This compares the column "city" from price.xsl to the column of the
-same name from frpm1516.
+same name from rentprice2016.
 
-Methodology: When combining frpm1415 with frpm1516 during data preparation,
-take the difference of values of "Percent (%) Eligible Free (K-12)" for each
-school and create a new variable called price_rate_change_2014_to_2015. Then,
+Methodology: When combining rentprice2015 with rentprice2016 during data 
+preparation, take the difference of values of house renting for eachcity 
+and create a new variable called price_rate_change_2015_to_2016. Then,
 use proc sort to create a temporary sorted table in descending by
-price_rate_change_2014_to_2015. Finally, use proc print here to display the
+price_rate_change_2015_to_2016. Finally, use proc print here to display the
 first five rows of the sorted dataset.
 
-Limitations: This methodology does not account for schools with missing data,
+Limitations: This methodology does not account for cities with missing data,
 nor does it attempt to validate data in any way, like filtering for percentages
 between 0 and 1.
 
@@ -73,18 +73,18 @@ data or a rolling average of previous years' data as a proxy.
 ;
 
 proc freq
-        data=cde_2014_analytic_file
+        data=rentprice_2015_analytic_file
     ;
     table
-             Percent_Eligible_FRPM_K12
-            *PCTGE1500
+            Rentprice_FRPM_2016
+            *rentprice2015
             / missing norow nocol nopercent
     ;
         where
-            not(missing(PCTGE1500))
+            not(missing(rentprice2015))
     ;
     format
-        Percent_Eligible_FRPM_K12 Percent_Eligible_FRPM_K12_bins.
+        Rentprice_2015 Percent_Rentprice_2016_bins.
         PCTGE1500 PCTGE1500_bins.
     ;
 run;
@@ -122,8 +122,8 @@ footnote3
 ;
 
 *
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column PCTGE1500 from sat15.
+Note: This compares the column "city" from rentprice2015
+to the column city from rentprice2016. 
 
 Methodology: Use proc means to compute 5-number summaries of population and
 PCTGE1500. Then use proc format to create formatsthat bin both columns with 
@@ -140,7 +140,7 @@ statistical technique like linear regression.
 ;
 
 proc print
-        data=cde_2014_analytic_file_sort_sat(obs=3)
+        data=rentprice_2015_analytic_file_sort_sat(obs=3)
     ;
     id
         City
@@ -184,13 +184,13 @@ more precisely."
 ;
 
 *
-Note: This compares the column NUMTSTTAKR from sat15 to the column TOTAL from
-gradaf15.
+Note: This compares the column for each month from rentprice15 to the column TOTAL from
+rentprice16.
 
-Methodology: When combining sat15 and gradaf15 during data preparation, take
-the difference between NUMTSTTAKR in sat15 and TOTAL in gradaf15 for each
-school and create a new variable called excess_sat_takers. Then, use proc sort
-to create a temporary sorted table in descending by excess_sat_takers. Finally,
+Methodology: When combining rentprice15 and rentpricef16 during data preparation, take
+the difference between houserenting for each month in 2015 and TOTAL in 2016 for each
+city and create a new variable called rentprice_rate_change. Then, use proc sort
+to create a temporary sorted table in descending by rentprice_rate_change. Finally,
 use proc print here to display the first 10 rows of the sorted dataset.
 
 Limitations: This methodology does not account for schools with missing data,
@@ -204,13 +204,13 @@ of previous years' data as a proxy.
 ;
 
 proc print
-        data=cde_2014_analytic_file_sort_frpm(obs=5)
+        data=cde_2016_analytic_file_sort_frpm(obs=5)
     ;
     id
         City
     ;
     var
-        frpm_rate_change_2014_to_2015
+        rentprice_rate_change_2015_to_2016
     ;
 run;
 
