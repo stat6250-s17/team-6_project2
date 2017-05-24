@@ -77,14 +77,14 @@ proc freq
     ;
     table
             Rentprice_FRPM_2016
-            *PCTGE1500
+            *rentprice2015
             / missing norow nocol nopercent
     ;
         where
-            not(missing(PCTGE1500))
+            not(missing(rentprice2015))
     ;
     format
-        Percent_Eligible_FRPM_K12 Percent_Eligible_FRPM_K12_bins.
+        Rentprice_2015 Percent_Rentprice_2016_bins.
         PCTGE1500 PCTGE1500_bins.
     ;
 run;
