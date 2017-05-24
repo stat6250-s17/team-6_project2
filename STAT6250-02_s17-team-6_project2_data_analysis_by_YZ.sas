@@ -54,16 +54,16 @@ outliers."
 
 *
 Note: This compares the column "city" from price.xsl to the column of the
-same name from frpm1516.
+same name from rentprice2016.
 
-Methodology: When combining frpm1415 with frpm1516 during data preparation,
-take the difference of values of "Percent (%) Eligible Free (K-12)" for each
-school and create a new variable called price_rate_change_2014_to_2015. Then,
+Methodology: When combining rentprice2015 with rentprice2016 during data 
+preparation, take the difference of values of house renting for eachcity 
+and create a new variable called price_rate_change_2015_to_2016. Then,
 use proc sort to create a temporary sorted table in descending by
-price_rate_change_2014_to_2015. Finally, use proc print here to display the
+price_rate_change_2015_to_2016. Finally, use proc print here to display the
 first five rows of the sorted dataset.
 
-Limitations: This methodology does not account for schools with missing data,
+Limitations: This methodology does not account for cities with missing data,
 nor does it attempt to validate data in any way, like filtering for percentages
 between 0 and 1.
 
@@ -184,10 +184,10 @@ more precisely."
 ;
 
 *
-Note: This compares the column NUMTSTTAKR from sat15 to the column TOTAL from
-gradaf15.
+Note: This compares the column for each month from rentprice15 to the column TOTAL from
+rentprice16.
 
-Methodology: When combining sat15 and gradaf15 during data preparation, take
+Methodology: When combining sat15 and rentpricef15 during data preparation, take
 the difference between NUMTSTTAKR in sat15 and TOTAL in gradaf15 for each
 school and create a new variable called excess_sat_takers. Then, use proc sort
 to create a temporary sorted table in descending by excess_sat_takers. Finally,
