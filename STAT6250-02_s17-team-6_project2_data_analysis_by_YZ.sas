@@ -98,8 +98,8 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: Which top 3 area rentals increase fastest in the past five years and 
-which areas increase the lowest?'
+'Question: Which top 3 area obtain the house rent that increase fastest in the 
+past five years and which areas increase the slowest?'
 ;
 
 title2
@@ -125,8 +125,8 @@ footnote3
 Note: This compares the column "city" from rentprice2015
 to the column city from rentprice2016. 
 
-Methodology: Use proc means to compute 5-number summaries of population and
-PCTGE1500. Then use proc format to create formatsthat bin both columns with 
+Methodology: Use proc means to compute 5-number summaries of house rent for
+2015 and 2016. Then use proc format to create formatsthat bin both columns with 
 respect to the proc means output. Then use proc freq to create a cross-tab 
 of the two variables with respect to the created formats.
 
@@ -184,17 +184,17 @@ more precisely."
 ;
 
 *
-Note: This compares the column for each month from rentprice15 to the column TOTAL from
-rentprice16.
+Note: This compares the column for each month from rentprice15 to the column TOTAL
+from rentprice16.
 
-Methodology: When combining rentprice15 and rentpricef16 during data preparation, take
-the difference between houserenting for each month in 2015 and TOTAL in 2016 for each
-city and create a new variable called rentprice_rate_change. Then, use proc sort
-to create a temporary sorted table in descending by rentprice_rate_change. Finally,
-use proc print here to display the first 10 rows of the sorted dataset.
+Methodology: When combining rentprice15 and rentpricef16 during data preparation, 
+take the difference between house rent for each month in 2015 and TOTAL in 2016 for
+each city and create a new variable called rentprice_rate_change. Then, use proc 
+sort to create a temporary sorted table in descending by rentprice_rate_change. 
+Finally, use proc print here to display the first 12 rows of the sorted dataset.
 
-Limitations: This methodology does not account for schools with missing data,
-nor does it attempt to validate data in any way, like filtering for values
+Limitations: This methodology does not account for each months' rents with missing 
+data, nor does it attempt to validate data in any way, like filtering for values
 outside of admissable values.
 
 Followup Steps: More carefully clean the values of variables so that the
@@ -204,7 +204,7 @@ of previous years' data as a proxy.
 ;
 
 proc print
-        data=cde_2016_analytic_file_sort_frpm(obs=5)
+        data=cde_2016_analytic_file_sort_frpm(obs=12)
     ;
     id
         City
