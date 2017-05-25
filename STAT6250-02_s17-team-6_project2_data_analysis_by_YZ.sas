@@ -9,7 +9,7 @@ questions regarding Zillow Rent Index, the median estimated monthly rental
 price for a given area, and covers multifamily, single family, condominium, 
 and cooperative homes in Zillow’s database, regardless of whether they are 
 currently listed for rent. 
-Dataset Name: frpm1415_analytic_file created in external file
+Dataset Name: _analytic_file created in external file
 STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
 See included file for dataset properties
@@ -21,7 +21,7 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset cde_2014_analytic_file;
+* load external file that generates analytic dataset rentprice_2015_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project2_data_preparation.sas';
 
 
