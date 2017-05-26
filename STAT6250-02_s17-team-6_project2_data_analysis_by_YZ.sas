@@ -30,7 +30,8 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'Research question: Which metropolitan area is the most expensive to live in?'
+'Research question: What are the top seven most expensive metropolitan areas to 
+live in between rentprice2015 and rentprice2016?'
 ;
 
 title2
@@ -159,8 +160,8 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: During which months or seasons do the house renting decrease overall 
-according to the output?'
+'Question: What are the top five areas that decrease most in rentprice for February
+comparing from 2015 to 2016?'
 ;
 
 title2
