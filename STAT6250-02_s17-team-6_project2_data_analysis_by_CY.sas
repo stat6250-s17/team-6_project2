@@ -97,6 +97,10 @@ run;
 title;
 footnote;
 
+title1
+'Average rent price for Top 5 cities with largest population'
+;
+
 proc sort data=rentprice_avg out=rentprice_sort2;
     by
         population_rank
@@ -114,6 +118,7 @@ proc print
     ;
 run;
 
+title;
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -199,6 +204,22 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
+title1
+'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
+;
+
+title2
+'This will help reveal economic trend for those cities - idenitfy which cities are on the rise.'
+;
+
+footnote1
+'Three cities in the top 5 list are located in New York, one in California, and one in Florida. All 5 cities saw an increase of well over $1,000 in average rent prices between 2015 and 2016.'
+;
+
+footnote2
+'The amount of increase in rent is really startling. A follow-up is to see what cities had a decrease in average rent price.'
+;
+
 *
 Question: Which 5 cities have had the largest increase in rent prices from 
 2015 to 2016? 
@@ -247,3 +268,26 @@ run;
 
 title;
 footnote;
+
+title1
+'Top 5 cities with largest decrease in average rent from 2015 to 2016'
+;
+
+proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
+    by 
+        diffavg
+    ;
+run;
+
+proc print
+        data=rentprice_decr_2015_2016_sort(obs=10)
+    ;
+    id
+        City Metro County State 
+	;
+	var
+		avg2015 avg2016 diffavg
+    ;
+run;
+
+title;
