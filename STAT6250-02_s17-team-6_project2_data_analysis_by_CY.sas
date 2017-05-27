@@ -36,11 +36,15 @@ title2
 ;
 
 footnote1
-'XXX'
+'Jupiter Island has the most expensive average rent from 2015-2016 at about $20,800 a month.'
 ;
 
 footnote2
-'XXX2'
+'The top five cities are located in Florida and California. These cities are not well-known but are located near well-known metropolitan areas like San Francisco, Los Angeles, and Miami. '
+;
+
+footnote3
+'These cities are likely tiny, exclusive and highly expensive communities. A follow-up would be to look at the cities by the population ranking.'
 ;
 
 *
@@ -66,21 +70,50 @@ Followup Steps: Possible follow-up steps is to calculate change over month.
 Or compare the average against the last month.
 ;
 
+data rentprice_avg;
+    set rentprice_combined;
+    average=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
+run;
 
+proc sort data=rentprice_avg out=rentprice_sorted;
+    by descending
+	    average
+	;
+run;
 
 proc print
-        data=(obs=5)
+        data=rentprice_sorted(obs=5)
     ;
     id
-        School_Name
-    ;
-    var
-        frpm_rate_change_2014_to_2015
+        City Metro County State
+	;
+	var
+		average
     ;
 run;
 
 title;
 footnote;
+
+proc sort data=rentprice_avg out=rentprice_sort2;
+    by
+        population_rank
+    ;
+run;
+
+proc print
+        data=rentprice_sort2(obs=5)
+    ;
+    id
+        City Metro County State Population_Rank
+	;
+	var
+		average
+    ;
+run;
+
 
 
 
