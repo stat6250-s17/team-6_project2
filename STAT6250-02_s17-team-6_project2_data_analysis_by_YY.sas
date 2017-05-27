@@ -51,9 +51,9 @@ footnote2
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
 
-Methodology: Use PROC SORT extract and sort the Average Rent from the dataset,
-and output the results to a temporary dataset. Use PROC PRINT to print
-the first ten observations from the temporary dataset.
+Methodology: Use proc sort to create a temporary sorted table in descending
+by rate_change. Finally, use proc print here to display the first ten 
+observations from the sorted dataset.
 
 Limitations: This methodology does not account for districts with unknown
 data, nor does it attempt to validate data in any way.
@@ -61,23 +61,17 @@ data, nor does it attempt to validate data in any way.
 Followup Steps: More carefully clean the values of the variable.
 ;
 
-proc freq
-        data=rentprice_analytic_file
-    ;
-    table
-        Avg_rent/ noprint out=Avg_rent_frequency;
-run;
 proc sort
-        data=Avg_rent_frequency out=Avg_rent_sorted
+        data=housing_concat
+        out=housing_concat_sorted
     ;
-    by
-        descending count
-    ;
+    by 
+        descending Avg_Rent;
 run;
-proc print
-        noobs
-        data=Avg_rent_sorted(obs=10)
-    ;
+proc print 
+        data=housing_concat_sorted(obs=10);
+        id City;
+        var housing_concat_sorted;
 run;
 title;
 footnote;
