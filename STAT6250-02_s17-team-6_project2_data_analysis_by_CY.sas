@@ -72,6 +72,7 @@ Or compare the average against the last month.
 
 data rentprice_avg;
     set rentprice_combined;
+
     average=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
@@ -79,23 +80,24 @@ run;
 
 proc sort data=rentprice_avg out=rentprice_sorted;
     by descending
-	    average
-	;
+        average
+	  ;
 run;
 
 proc print
         data=rentprice_sorted(obs=5)
-    ;
-    id
+  ;
+  id
         City Metro County State
 	;
 	var
-		average
-    ;
+		    average
+  ;
 run;
 
 title;
 footnote;
+
 
 title1
 'Average rent price for Top 5 cities with largest population'
@@ -120,9 +122,11 @@ run;
 
 title;
 
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
+
 
 title1
 'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
@@ -151,11 +155,6 @@ Question: What are the top 5 cities with the highest rent flunctuation between
 Rationale: Rent prices fluctuates. This will help us identify communities may 
 be have seasonal factors or are more vacational cities.
 
-Rationale: 
-This will help identify cities where renting may be an issue due to high demand 
-and low supply or the opposite. It will also show if there is any interesting 
-economic insights about cities with highest rent.
-
 Methodology: Using Max to identify the highest rent across obsveration, min to 
 idenitfy the lowest, and calculate the difference between the max and min.
 
@@ -173,7 +172,7 @@ data rentprice_range;
     maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
-	minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+	  minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diff=maxmonth-minmonth;
@@ -199,10 +198,10 @@ title;
 footnote;
 
 
-
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
+
 
 title1
 'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
@@ -222,14 +221,6 @@ footnote2
 
 *
 Question: Which 5 cities have had the largest increase in rent prices from 
-2015 to 2016? 
-
-Rational: This will help indicate which cities are up-and-coming - 
-possibly because more people are moving in for job opportunities 
-so demand is increasing as well.
-
-Methodology: Use PROC Means to caculate an average for 2015 and for 2016
-individually. Then created a new variables that takes the different from
 the two averages. Sort by the difference variable and print the top 5 cities.
 
 Limitations: This only looks at increase of price. Looking at highest decrease
@@ -245,7 +236,7 @@ data rentprice_incr_2015_2016;
 	    rentprice_combined;
     avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
-	avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
+	  avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diffavg=avg2016-avg2015;
 
@@ -291,3 +282,4 @@ proc print
 run;
 
 title;
+
