@@ -6,10 +6,10 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding college-preparation trends at CA public K-12 schools
-Dataset Name: cde_2014_analytic_file created in external file
-STAT6250-02_s17-team-0_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
+questions regarding rental prices and living cost trends at in the US.
+Dataset Name: rentprice_combined and livingcost_combined created in 
+external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
+assumed to be in the same directory as this file
 See included file for dataset properties
 ;
 
@@ -27,9 +27,25 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
+title1
+'What are the Top 5 US Cities with the highest property rent price in from 2015-2016?'
+;
+
+title2
+'This will help identify which cities are the most expensive to live in.'
+;
+
+footnote1
+'XXX'
+;
+
+footnote2
+'XXX2'
+;
+
 *
 Question: What are the top 5 most expensive US cities in terms of average rent 
-price in 2016? Are the 5 least expensive US cities in terms of average rent 
+price in 2015-2016? Are the 5 least expensive US cities in terms of average rent 
 price? 
 
 Rationale: 
@@ -49,6 +65,26 @@ This will not show if rent has been declining in certain cities.
 Followup Steps: Possible follow-up steps is to calculate change over month.
 Or compare the average against the last month.
 ;
+
+
+
+proc print
+        data=(obs=5)
+    ;
+    id
+        School_Name
+    ;
+    var
+        frpm_rate_change_2014_to_2015
+    ;
+run;
+
+title;
+footnote;
+
+
+
+
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
