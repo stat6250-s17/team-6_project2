@@ -127,7 +127,6 @@ title;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
-
 title1
 'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
 ;
@@ -202,7 +201,6 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
-
 title1
 'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
 ;
@@ -222,6 +220,11 @@ footnote2
 *
 Question: Which 5 cities have had the largest increase in rent prices from 
 the two averages. Sort by the difference variable and print the top 5 cities.
+
+Methodology: Use proc mean to calculate the average rent price for 2015 
+and for 2016 separate. Then take the difference from 2016 and 2015. Use
+proc sort to list the cities by the largest difference in rent prices 
+between the average of 2015 and 2016.
 
 Limitations: This only looks at increase of price. Looking at highest decrease
 can also reveal interesting insights.
