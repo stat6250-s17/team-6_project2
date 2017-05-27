@@ -86,13 +86,13 @@ run;
 
 proc print
         data=rentprice_sorted(obs=5)
-  ;
-  id
+    ;
+    id
         City Metro County State
-	;
-	var
-		    average
-  ;
+    ;
+    var
+        average
+    ;
 run;
 
 title;
@@ -114,9 +114,9 @@ proc print
     ;
     id
         City Metro County State Population_Rank
-	;
-	var
-		average
+    ;
+    var
+	average
     ;
 run;
 
@@ -168,11 +168,11 @@ max and min rent price.
 
 data rentprice_range;
     set
-	    rentprice_combined;
+        rentprice_combined;
     maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
-	  minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+    minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diff=maxmonth-minmonth;
@@ -188,9 +188,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		maxmonth minmonth diff
+    ;
+    var
+	maxmonth minmonth diff
     ;
 run;
 
@@ -233,10 +233,10 @@ positive difference.
 
 data rentprice_incr_2015_2016;
     set
-	    rentprice_combined;
+        rentprice_combined;
     avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
-	  avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
+    avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diffavg=avg2016-avg2015;
 
@@ -251,9 +251,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		avg2015 avg2016 diffavg
+    ;
+    var
+	avg2015 avg2016 diffavg
     ;
 run;
 
@@ -275,9 +275,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		avg2015 avg2016 diffavg
+    ;
+    var
+	avg2015 avg2016 diffavg
     ;
 run;
 
