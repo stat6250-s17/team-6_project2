@@ -73,7 +73,7 @@ Or compare the average against the last month.
 data rentprice_avg;
     set rentprice_combined;
     average=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
-        Aug_15Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
 run;
 
@@ -115,37 +115,84 @@ proc print
 run;
 
 
-
-
-
-
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
-*
-Question: Which month has the lowest average rent price across all the cities 
-and which month has the lowest average rent price across all the cities in 2016? 
+title1
+'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
+;
 
-Rationale: Rent prices fluctuates. This will help us identify when during the 
-year can be expect lowest average rent prices and highest rent prices. This will 
-also indicate when rental units are most in demand and low supply vs. when demand 
-is lower. 
+title2
+'This may reveal some interesting insight about cities where rent is more volatile and if there may be economic reasons for such.'
+;
+
+footnote1
+'Not surprisingly, Jupiter Island once again comes out on top. This may suggest that Jupiter Island is a vacation spot and therefore experiences high and low visitation season.'
+;
+
+footnote2
+'All 5 of these cities upon further research are small, exclusive communities with low population but inhabited by the wealthiest people in US.'
+;
+
+footnote3
+'This could also suggest that the rent fluctuation could have something to do with the economy and how well its performing, especially since so much is dependent on the very few.'
+;
+
+*
+Question: What are the top 5 cities with the highest rent flunctuation between 
+2015-2016? 
+
+Rationale: Rent prices fluctuates. This will help us identify communities may 
+be have seasonal factors or are more vacational cities.
 
 Rationale: 
 This will help identify cities where renting may be an issue due to high demand 
 and low supply or the opposite. It will also show if there is any interesting 
-geographic insights about cities with highest rent - such as 
-coastal cities vs. inland cities.)
+economic insights about cities with highest rent.
 
-Methodology: Using PROC Means to caculated the average price across all cities 
-and then use print to see what the average rent is for each month.
+Methodology: Using Max to identify the highest rent across obsveration, min to 
+idenitfy the lowest, and calculate the difference between the max and min.
 
-Limitations: The problem that may occur is if some cities have a different low
-season than other cities.
+Limitations: This output does not show which month is the max and which is the 
+min. Some cities may have a seasonal pattern different from others and this will 
+not reveal this information.
 
-Followup Steps: A possible follow-up is to find the lowest month for each city.
+Followup Steps: A possible follow-up is to identify the month associate with the 
+max and min rent price.
 ;
+
+data rentprice_range;
+    set
+	    rentprice_combined;
+    maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
+	minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
+    diff=maxmonth-minmonth;
+
+proc sort data=rentprice_range out=rentprice_s1;
+    by descending
+        diff
+    ;
+run;
+
+proc print
+        data=rentprice_s1(obs=5)
+    ;
+    id
+        City Metro County State 
+	;
+	var
+		maxmonth minmonth diff
+    ;
+run;
+
+title;
+footnote;
+
 
 
 *******************************************************************************;
@@ -153,7 +200,7 @@ Followup Steps: A possible follow-up is to find the lowest month for each city.
 *******************************************************************************;
 
 *
-Question: Which 3 cities have had the largest increase in rent prices from 
+Question: Which 5 cities have had the largest increase in rent prices from 
 2015 to 2016? 
 
 Rational: This will help indicate which cities are up-and-coming - 
@@ -162,7 +209,7 @@ so demand is increasing as well.
 
 Methodology: Use PROC Means to caculate an average for 2015 and for 2016
 individually. Then created a new variables that takes the different from
-the two averages. Sort by the difference variable and print the top 3 cities.
+the two averages. Sort by the difference variable and print the top 5 cities.
 
 Limitations: This only looks at increase of price. Looking at highest decrease
 can also reveal interesting insights.
@@ -170,3 +217,33 @@ can also reveal interesting insights.
 Followup Steps: Print the highest negative difference, not only the highest 
 positive difference.
 ;
+
+
+data rentprice_incr_2015_2016;
+    set
+	    rentprice_combined;
+    avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
+	avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
+    diffavg=avg2016-avg2015;
+
+proc sort data=rentprice_incr_2015_2016 out=rentprice_incr_2015_2016_sort;
+    by descending
+        diffavg
+    ;
+run;
+
+proc print
+        data=rentprice_incr_2015_2016_sort(obs=5)
+    ;
+    id
+        City Metro County State 
+	;
+	var
+		avg2015 avg2016 diffavg
+    ;
+run;
+
+title;
+footnote;
