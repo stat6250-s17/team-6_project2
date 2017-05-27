@@ -86,13 +86,13 @@ run;
 
 proc print
         data=rentprice_sorted(obs=5)
-  ;
-  id
+    ;
+    id
         City Metro County State
-	;
-	var
-		    average
-  ;
+    ;
+    var
+        average
+    ;
 run;
 
 title;
@@ -114,9 +114,9 @@ proc print
     ;
     id
         City Metro County State Population_Rank
-	;
-	var
-		average
+    ;
+    var
+	average
     ;
 run;
 
@@ -126,7 +126,6 @@ title;
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-
 
 title1
 'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
@@ -168,11 +167,11 @@ max and min rent price.
 
 data rentprice_range;
     set
-	    rentprice_combined;
+        rentprice_combined;
     maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
-	  minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+    minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diff=maxmonth-minmonth;
@@ -188,9 +187,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		maxmonth minmonth diff
+    ;
+    var
+	maxmonth minmonth diff
     ;
 run;
 
@@ -201,7 +200,6 @@ footnote;
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-
 
 title1
 'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
@@ -223,6 +221,11 @@ footnote2
 Question: Which 5 cities have had the largest increase in rent prices from 
 the two averages. Sort by the difference variable and print the top 5 cities.
 
+Methodology: Use proc mean to calculate the average rent price for 2015 
+and for 2016 separate. Then take the difference from 2016 and 2015. Use
+proc sort to list the cities by the largest difference in rent prices 
+between the average of 2015 and 2016.
+
 Limitations: This only looks at increase of price. Looking at highest decrease
 can also reveal interesting insights.
 
@@ -233,10 +236,10 @@ positive difference.
 
 data rentprice_incr_2015_2016;
     set
-	    rentprice_combined;
+        rentprice_combined;
     avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
         Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
-	  avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
+    avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
         May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
     diffavg=avg2016-avg2015;
 
@@ -251,9 +254,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		avg2015 avg2016 diffavg
+    ;
+    var
+	avg2015 avg2016 diffavg
     ;
 run;
 
@@ -275,9 +278,9 @@ proc print
     ;
     id
         City Metro County State 
-	;
-	var
-		avg2015 avg2016 diffavg
+    ;
+    var
+	avg2015 avg2016 diffavg
     ;
 run;
 
