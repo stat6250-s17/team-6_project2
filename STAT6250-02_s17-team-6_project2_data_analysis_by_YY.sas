@@ -5,11 +5,14 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding rental prices and living cost trends at in the US.
+questions regarding Zillow Rent Index, the median estimated monthly rental 
+price for a given area, and covers multifamily, single family, condominium, 
+and cooperative homes in Zillow’s database, regardless of whether they are 
+currently listed for rent. 
 
-Dataset Name: rentprice_combined and livingcost_combined created in 
-external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
-assumed to be in the same directory as this file
+Dataset Name: _analytic_file created in external file
+STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
+in the same directory as this file
 
 See included file for dataset properties
 ;
@@ -37,20 +40,20 @@ title2
 ;
 
 footnote1
-"Based on the above output, there are top ten highest rent price of cities that are Lausanne, Zurich, Geneva, Basel, Perth, Nashville, Canberra, Bergen, Luxembourg, Stavanger.'
+"Based on the above output, there are top ten highest rent price of cities that are Hanoi, Caracas, Barcelona, Montevideo, Vancouver, Tampa, Seattle, San Francisco, San Diego.'
 ;
 
 footnote2
-"Moreover, we can see that the top four highest rent price of cities are Swiss cities."
+"Moreover, we can see that the top five to ten highest rent price of cities are the U.S. cities."
 ;
 
 *
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
 
-Methodology: Use proc sort to create a temporary sorted table in descending
-by rate_change. Finally, use proc print here to display the first ten 
-observations from the sorted dataset.
+Methodology: Use PROC SORT extract and sort the Average Rent from the dataset,
+and output the results to a temporary dataset. Use PROC PRINT to print
+the first ten observations from the temporary dataset.
 
 Limitations: This methodology does not account for cities with unknown
 data, nor does it attempt to validate data in any way.
@@ -65,18 +68,10 @@ proc freq
     table
         Avg_rent/ noprint out=Avg_rent_frequency;
 run;
-
-proc sort
-        data=housing_concat
-        out=housing_concat_sorted
+proc print
+        noobs
+        data=Avg_rent_sorted(obs=10)
     ;
-    by 
-        descending Avg_Rent;
-run;
-proc print 
-        data=housing_concat_sorted(obs=10);
-        id City;
-        var housing_concat_sorted;
 run;
 
 title;
@@ -100,7 +95,7 @@ footnote1
 ;
 
 footnote2
-"the cost of living in San Francisco is higher than Beijing."
+"the average disposable income in San Francisco is higher than Beijing."
 ;
 
 *
@@ -123,14 +118,6 @@ proc means
         data=costliving_combined
     var
         Avg_Disposable_Income
-    ;
-run;
-proc format;
-        value Avg_Disposable_Income_bin
-        low-22="q1 Avg Disposable Income"
-        23-29="q2 Avg Disposable Income"
-        30-42="q3 Avg Disposable Income"
-        43-high="q4 Avg Disposable Income"
     ;
 run;
 proc freq
@@ -159,11 +146,11 @@ title2
 ;
 
 footnote1
-"Based on the above output, there are top ten lowest crime rate of cities that are "
+"Based on the above output, there are top ten lowest crime rate of cities that are Malaga, Marbella, Abu Dhabi, Tokyo, Aachen, Dresden, Dusseldorf, Zurich, Taipei, Hong Kong."
 ;
 
 footnote2
-"Moreover, we can see that the top lowest crime rate of cities are Swiss cities."
+"Moreover, we can see that the top two lowest crime rate of cities are Spain cities, and three cities are Germany."
 ;
 
 *
@@ -185,13 +172,6 @@ proc freq
     ;
     table
         Crime_Rating/ noprint out=Crime_Rating_frequency;
-run;
-proc sort
-        data=Crime_Rating_frequency out=Crime_Rating_sorted
-    ;
-    by
-        ascending count
-    ;
 run;
 proc print
         noobs
