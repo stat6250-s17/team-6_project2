@@ -5,11 +5,14 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding rental prices and living cost trends at in the US.
+questions regarding Zillow Rent Index, the median estimated monthly rental 
+price for a given area, and covers multifamily, single family, condominium, 
+and cooperative homes in Zillow’s database, regardless of whether they are 
+currently listed for rent. 
 
-Dataset Name: rentprice_combined and livingcost_combined created in 
-external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
-assumed to be in the same directory as this file
+Dataset Name: _analytic_file created in external file
+STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
+in the same directory as this file
 
 See included file for dataset properties
 ;
@@ -37,11 +40,11 @@ title2
 ;
 
 footnote1
-"Based on the above output, there are top ten highest rent price of cities that are Lausanne, Zurich, Geneva, Basel, Perth, Nashville, Canberra, Bergen, Luxembourg, Stavanger.'
+"Based on the above output, there are top ten highest rent price of cities that are Hanoi, Caracas, Barcelona, Montevideo, Vancouver, Tampa, Seattle, San Francisco, San Diego.'
 ;
 
 footnote2
-"Moreover, we can see that the top four highest rent price of cities are Swiss cities."
+"Moreover, we can see that the top five to ten highest rent price of cities are the U.S. cities."
 ;
 
 *
@@ -69,7 +72,7 @@ proc sort
         data=Avg_rent_frequency out=Avg_rent_sorted
     ;
     by
-        descending count
+        descending Avg_Rent
     ;
 run;
 proc print
@@ -99,7 +102,7 @@ footnote1
 ;
 
 footnote2
-"the cost of living in San Francisco is higher than Beijing."
+"the average disposable income in San Francisco is higher than Beijing."
 ;
 
 *
@@ -158,11 +161,11 @@ title2
 ;
 
 footnote1
-"Based on the above output, there are top ten lowest crime rate of cities that are "
+"Based on the above output, there are top ten lowest crime rate of cities that are Malaga, Marbella, Abu Dhabi, Tokyo, Aachen, Dresden, Dusseldorf, Zurich, Taipei, Hong Kong."
 ;
 
 footnote2
-"Moreover, we can see that the top lowest crime rate of cities are Swiss cities."
+"Moreover, we can see that the top two lowest crime rate of cities are Spain cities."
 ;
 
 *
