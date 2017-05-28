@@ -289,3 +289,21 @@ data rentprice_combined_edited;
 		;
 	set rentprice_combined;
 run;
+* use proc sort to create a temporary sorted table in descending by
+costliving_combined;
+proc sort
+        data=Avg_rent_frequency out=Avg_rent_sorted
+    ;
+    by
+        descending Avg_Rent
+    ;
+run;
+* use proc sort to create a temporary sorted table in ascending by
+costliving_combined;
+proc sort
+        data=Crime_Rating_frequency out=Crime_Rating_sorted
+    ;
+    by
+        ascending Crime_Rating
+    ;
+run;
