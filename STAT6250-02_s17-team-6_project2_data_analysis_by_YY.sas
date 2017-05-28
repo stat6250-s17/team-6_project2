@@ -68,13 +68,6 @@ proc freq
     table
         Avg_rent/ noprint out=Avg_rent_frequency;
 run;
-proc sort
-        data=Avg_rent_frequency out=Avg_rent_sorted
-    ;
-    by
-        descending Avg_Rent
-    ;
-run;
 proc print
         noobs
         data=Avg_rent_sorted(obs=10)
@@ -179,13 +172,6 @@ proc freq
     ;
     table
         Crime_Rating/ noprint out=Crime_Rating_frequency;
-run;
-proc sort
-        data=Crime_Rating_frequency out=Crime_Rating_sorted
-    ;
-    by
-        ascending count
-    ;
 run;
 proc print
         noobs
