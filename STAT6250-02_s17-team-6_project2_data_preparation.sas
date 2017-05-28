@@ -191,7 +191,6 @@ data costliving_combined_edited;
 		Gasoline
 		Avg_Rent
 		Avg_Disposable_Income
-		Crime_Rating
 		;
 	keep
 		Country
@@ -202,7 +201,6 @@ data costliving_combined_edited;
 		Gasoline
 		Avg_Rent
 		Avg_Disposable_Income
-		Crime_Rating
 		;
 	set costliving_combined;
 run;
