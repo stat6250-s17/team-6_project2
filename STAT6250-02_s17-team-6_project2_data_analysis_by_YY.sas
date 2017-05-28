@@ -5,14 +5,11 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding Zillow Rent Index, the median estimated monthly rental 
-price for a given area, and covers multifamily, single family, condominium, 
-and cooperative homes in Zillow’s database, regardless of whether they are 
-currently listed for rent. 
+questions regarding rental prices and living cost trends at in the US.
 
-Dataset Name: rentprice_analytic_file created in external file
-STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
+Dataset Name: rentprice_combined and livingcost_combined created in 
+external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
+assumed to be in the same directory as this file
 
 See included file for dataset properties
 ;
@@ -55,11 +52,19 @@ Methodology: Use proc sort to create a temporary sorted table in descending
 by rate_change. Finally, use proc print here to display the first ten 
 observations from the sorted dataset.
 
-Limitations: This methodology does not account for districts with unknown
+Limitations: This methodology does not account for cities with unknown
 data, nor does it attempt to validate data in any way.
 
-Followup Steps: More carefully clean the values of the variable.
+Possible Followup Steps: More carefully clean values in order to filter out 
+any possible illegal values, and better handle missing data
 ;
+
+proc freq
+        data=costliving_combined
+    ;
+    table
+        Avg_rent/ noprint out=Avg_rent_frequency;
+run;
 
 proc sort
         data=housing_concat
@@ -73,6 +78,7 @@ proc print
         id City;
         var housing_concat_sorted;
 run;
+
 title;
 footnote;
 
@@ -99,27 +105,44 @@ footnote2
 
 *
 Note: This would involve making either a frequency chart to show 
-the living cost in San Francisco.
+the living cost in San Francisco and Beijing.
 
-Methodology:Compute five-number summaries by Cappuccino, Cinema, Wine, 
-Gasoline, Avg Rent and Avg Disposable Income from the dataset, 
-and output the results to a temporary dataset. Use PROC PRINT to print
-the Beijing and San Francesco observations from the temporary dataset.
+Methodology:Compute five-number summaries by Avg Disposable Income from the
+dataset, and output the results to a temporary dataset. Use PROC PRINT to
+print the Beijing and San Francesco observations from the temporary dataset.
 
-Limitations: This methodology does not account for schools with missing data,
-nor does it attempt to validate data in any way.
+Limitations: This problem is straight forward, the only draw-back would be if
+the Avg Disposable Income category is not given so we can not sort them properly.
 
-Possible Follow-up Steps: More carefully clean the values of the variable.
+Possible Follow-up Steps: A possible follow-up to this approach could use 
+an inferential statistical technique like linear regression.
 ;
 
 proc means
         min q1 median q3 max
-        data=rentprice_analytic_file
-    ;
-    class
-        City
+        data=costliving_combined
+    var
+        Avg_Disposable_Income
     ;
 run;
+proc format;
+        value Avg_Disposable_Income_bin
+        low-22="q1 Avg Disposable Income"
+        23-29="q2 Avg Disposable Income"
+        30-42="q3 Avg Disposable Income"
+        43-high="q4 Avg Disposable Income"
+    ;
+run;
+proc freq
+        data=homicide_analytic_file
+    ;
+    table
+        city*Avg_Disposable_Income/norow nocol nopercent;
+    format 
+        Avg_Disposable_Income Avg_Disposable_Income_bin.
+    ;
+run;
+
 title;
 footnote;
 
@@ -150,14 +173,15 @@ to see the relationship.
 Methodology: Use PROC PRINT to print the first ten observations from
 the temporary dataset created in the corresponding data-prep file.
 
-Limitations: This methodology does not account for districts with missing data,
+Limitations: This methodology does not account for cities with missing data,
 nor does it attempt to validate data in any way.
 
-Possible Follow-up Steps: More carefully clean the values of the variable.
+Possible Follow-up Steps:  More carefully clean values in order to filter out 
+any possible illegal values, and better handle missing data.
 ;
 
 proc freq
-        data=cde_2014_analytic_file
+        data=costliving_combined
     ;
     table
         Crime_Rating/ noprint out=Crime_Rating_frequency;
@@ -174,5 +198,6 @@ proc print
         data=Crime_Rating_sorted(obs=10)
     ;
 run;
+
 title;
 footnote;
