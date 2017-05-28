@@ -55,8 +55,8 @@ exactly replicated in costlivingNZ.
 proc format;
         value Avg_Disposable_Income_bin
         low-999="q1 Avg Disposable Income"
-        1000-1999="q2 Avg Disposable Income"
-        2000-2999="q3 Avg Disposable Income"
+        1000-1535="q2 Avg Disposable Income"
+        1536-2999="q3 Avg Disposable Income"
         3000-high="q4 Avg Disposable Income"
     ;
 run;
