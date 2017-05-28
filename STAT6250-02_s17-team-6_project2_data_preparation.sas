@@ -371,6 +371,7 @@ proc sort
         descending Avg_Rent
     ;
 run;
+
 * use proc sort to create a temporary sorted table in ascending by
 costliving_combined;
 proc sort
