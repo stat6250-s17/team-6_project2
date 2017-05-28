@@ -150,7 +150,7 @@ footnote1
 ;
 
 footnote2
-"Moreover, we can see that the top two lowest crime rate of cities are Spain cities."
+"Moreover, we can see that the top two lowest crime rate of cities are Spain cities, and three cities are Germany."
 ;
 
 *
