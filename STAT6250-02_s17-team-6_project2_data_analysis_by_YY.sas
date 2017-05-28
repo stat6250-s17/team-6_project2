@@ -127,14 +127,6 @@ proc means
         Avg_Disposable_Income
     ;
 run;
-proc format;
-        value Avg_Disposable_Income_bin
-        low-22="q1 Avg Disposable Income"
-        23-29="q2 Avg Disposable Income"
-        30-42="q3 Avg Disposable Income"
-        43-high="q4 Avg Disposable Income"
-    ;
-run;
 proc freq
         data=homicide_analytic_file
     ;
