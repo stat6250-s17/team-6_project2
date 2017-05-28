@@ -283,3 +283,75 @@ data rentprice_combined_edited;
 		;
 	set rentprice_combined;
 run;
+
+* Calculate the average rent price from 2015 to 2016 and produces a 
+table. Sort the table by average.
+;
+data rentprice_avg;
+    set rentprice_combined;
+
+    average=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
+run;
+
+proc sort data=rentprice_avg out=rentprice_sorted;
+    by descending
+        average
+	  ;
+run;
+
+
+proc sort data=rentprice_avg out=rentprice_sort2;
+    by
+        population_rank
+    ;
+run;
+
+* calculates the max and min rent price for each city. Calculates
+the difference between the max and min. Then sort by the difference.
+;
+
+data rentprice_range;
+    set
+        rentprice_combined;
+    maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
+    minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
+    diff=maxmonth-minmonth;
+
+proc sort data=rentprice_range out=rentprice_s1;
+    by descending
+        diff
+    ;
+run;
+
+* calculates the average rent price for 2015 and for 2016. Take the 
+difference between 2016 and 2015 to see what the increase/decrease is.
+Sort by the difference.
+;
+
+data rentprice_incr_2015_2016;
+    set
+        rentprice_combined;
+    avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
+        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
+    avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
+        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
+    diffavg=avg2016-avg2015;
+
+proc sort data=rentprice_incr_2015_2016 out=rentprice_incr_2015_2016_sort;
+    by descending
+        diffavg
+    ;
+run;
+
+proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
+    by 
+        diffavg
+    ;
+run;
+

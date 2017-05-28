@@ -70,20 +70,6 @@ Followup Steps: Possible follow-up steps is to calculate change over month.
 Or compare the average against the last month.
 ;
 
-data rentprice_avg;
-    set rentprice_combined;
-
-    average=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
-        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
-        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
-run;
-
-proc sort data=rentprice_avg out=rentprice_sorted;
-    by descending
-        average
-	  ;
-run;
-
 proc print
         data=rentprice_sorted(obs=5)
     ;
@@ -102,12 +88,6 @@ footnote;
 title1
 'Average rent price for Top 5 cities with largest population'
 ;
-
-proc sort data=rentprice_avg out=rentprice_sort2;
-    by
-        population_rank
-    ;
-run;
 
 proc print
         data=rentprice_sort2(obs=5)
@@ -165,23 +145,6 @@ Followup Steps: A possible follow-up is to identify the month associate with the
 max and min rent price.
 ;
 
-data rentprice_range;
-    set
-        rentprice_combined;
-    maxmonth=max(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
-        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
-        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16);
-    minmonth=min(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
-        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15 Jan_16 Feb_16 Mar_16 Apr_16 
-        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
-    diff=maxmonth-minmonth;
-
-proc sort data=rentprice_range out=rentprice_s1;
-    by descending
-        diff
-    ;
-run;
-
 proc print
         data=rentprice_s1(obs=5)
     ;
@@ -233,22 +196,6 @@ Followup Steps: Print the highest negative difference, not only the highest
 positive difference.
 ;
 
-
-data rentprice_incr_2015_2016;
-    set
-        rentprice_combined;
-    avg2015=mean(of Jan_15 Feb_15 Mar_15 Apr_15 May_15 Jun_15 Jul_15 
-        Aug_15 Sep_15 Oct_15 Nov_15 Dec_15);
-    avg2016=mean(of Jan_16 Feb_16 Mar_16 Apr_16 
-        May_16 Jun_16 Jul_16 Aug_16 Sep_16 Oct_16 Nov_16 Dec_16); 
-    diffavg=avg2016-avg2015;
-
-proc sort data=rentprice_incr_2015_2016 out=rentprice_incr_2015_2016_sort;
-    by descending
-        diffavg
-    ;
-run;
-
 proc print
         data=rentprice_incr_2015_2016_sort(obs=5)
     ;
@@ -267,11 +214,6 @@ title1
 'Top 5 cities with largest decrease in average rent from 2015 to 2016'
 ;
 
-proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
-    by 
-        diffavg
-    ;
-run;
 
 proc print
         data=rentprice_decr_2015_2016_sort(obs=10)
