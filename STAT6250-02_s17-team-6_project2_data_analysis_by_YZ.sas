@@ -100,7 +100,8 @@ footnote;
 
 title1
 'Question: Which top 3 area obtain the house rent that increase fastest in the 
-past five years and which areas increase the slowest?'
+past five years in 2015? And does the result remain the same comparing to that
+of 2016?'
 ;
 
 title2
