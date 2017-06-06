@@ -5,14 +5,11 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding Zillow Rent Index, the median estimated monthly rental 
-price for a given area, and covers multifamily, single family, condominium, 
-and cooperative homes in Zillow’s database, regardless of whether they are 
-currently listed for rent. 
+questions regarding rental prices and living cost trends at in the US.
 
-Dataset Name: _analytic_file created in external file
-STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
+Dataset Name: rentprice_combined and livingcost_combined created in 
+external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
+assumed to be in the same directory as this file
 
 See included file for dataset properties
 ;
@@ -23,7 +20,7 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset cde_2014_analytic_file;
+* load external file that generates analytic dataset livingcost_combined;
 %include '.\STAT6250-02_s17-team-6_project2_data_preparation.sas';
 
 
@@ -51,26 +48,24 @@ footnote2
 Note: This would involve average rent of cites, and then we can 
 make a table to see the relationship.
 
-Methodology: Use PROC SORT extract and sort the Average Rent from the dataset,
-and output the results to a temporary dataset. Use PROC PRINT to print
-the first ten observations from the temporary dataset.
+Methodology: Use PROC PRINT to print just the first ten observations from
+the temporary dataset created in the corresponding data-prep file.
 
 Limitations: This methodology does not account for cities with unknown
 data, nor does it attempt to validate data in any way.
 
-Possible Followup Steps: More carefully clean values in order to filter out 
+Possible Follow-up Steps: More carefully clean values in order to filter out 
 any possible illegal values, and better handle missing data
 ;
-
-proc freq
-        data=costliving_combined
-    ;
-    table
-        Avg_rent/ noprint out=Avg_rent_frequency;
-run;
 proc print
         noobs
-        data=Avg_rent_sorted(obs=10)
+        data= costliving_combined _temp(obs=10)
+    ;
+    id
+        city_Name
+    ;
+    var
+        Avg_rent
     ;
 run;
 
@@ -83,28 +78,30 @@ footnote;
 *******************************************************************************;
 
 title1
-'Research Question: Compare the cost of living in Beijing and San Francisco, which one is lower?'
+'Research Question: Does the United States cities have a higher Avg_Disposable_Income than other country cities?'
 ;
 
 title2
-'Rationale: Beijing is my hometown city, but now I am living in San Francisco Bay Area for study. I want to know how much of living cost to pay in both of cities, and which one is lower.'
+'Rationale: This indicates how the United States cities are different from the other country cities based on the disposable income.'
 ;
 
 footnote1
-"As can be seen, there are the cost of living in Beijing and San Francisco."
+"."
 ;
 
 footnote2
-"the average disposable income in San Francisco is higher than Beijing."
+"."
 ;
 
 *
-Note: This would involve making either a frequency chart to show 
-the living cost in San Francisco and Beijing.
+Note: This would involve making either a chart to show the disposable income 
+of the United States cities.
 
-Methodology:Compute five-number summaries by Avg Disposable Income from the
-dataset, and output the results to a temporary dataset. Use PROC PRINT to
-print the Beijing and San Francesco observations from the temporary dataset.
+Methodology: Use Proc Format to categorize the variable "country" into two 
+groups, "USA" and "Not_USA". Use a data procedure to associate the new format 
+with the variable "country", and store into a new dataset. Compute five-number
+summaries by Avg_Disposable_Income from the dataset, and output the results
+ to a temporary dataset. 
 
 Limitations: This problem is straight forward, the only draw-back would be if
 the Avg Disposable Income category is not given so we can not sort them properly.
@@ -116,17 +113,10 @@ an inferential statistical technique like linear regression.
 proc means
         min q1 median q3 max
         data=costliving_combined
+class 
+    country;
     var
         Avg_Disposable_Income
-    ;
-run;
-proc freq
-        data=homicide_analytic_file
-    ;
-    table
-        city*Avg_Disposable_Income/norow nocol nopercent;
-    format 
-        Avg_Disposable_Income Avg_Disposable_Income_bin.
     ;
 run;
 
@@ -166,17 +156,16 @@ nor does it attempt to validate data in any way.
 Possible Follow-up Steps:  More carefully clean values in order to filter out 
 any possible illegal values, and better handle missing data.
 ;
-
-proc freq
-        data=costliving_combined
-    ;
-    table
-        Crime_Rating/ noprint out=Crime_Rating_frequency;
-run;
 proc print
         noobs
-        data=Crime_Rating_sorted(obs=10)
+        data= costliving_combined _temp(obs=10)
     ;
+    id
+        city_Name
+    ;
+    var
+        Crime_Rating
+;
 run;
 
 title;
