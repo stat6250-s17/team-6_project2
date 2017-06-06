@@ -170,8 +170,7 @@ footnote2
 ;
 
 footnote3
-"There are some missing values in the xls, we need to clean out and run the code 
-more precisely."
+"There are some missing values in the xls, we need to clean out and run the code more precisely."
 ;
 
 *
