@@ -368,3 +368,61 @@ proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
     ;
 run;
 
+
+*Use PROC MEANS to compute the mean of Avg_Rent for City,
+and output the results to a temporary dataset, and use PROC SORT
+to extract and sort just the means the temporary dateset,
+which will be used as part of data analysis by YY.
+;
+proc means
+        mean
+        noprint
+        data=costliving_combined
+    ;
+    class
+        City
+    ;
+    var
+        Avg_Rent
+    ;
+    output
+        out=costliving_combined_temp
+    ;
+run;
+
+proc sort
+        data=costliving_combined_temp(where=(_STAT_="MEAN"))
+    ;
+    by
+        descending Avg_Rent
+    ;
+run;
+
+*Use PROC MEANS to compute the mean of Crime_Rating for City,
+and output the results to a temporary dataset, and use PROC SORT
+to extract and sort just the means the temporary dateset,
+which will be used as part of data analysis by YY.
+;
+proc means
+        mean
+        noprint
+        data=costliving_combined
+    ;
+    class
+        City
+    ;
+    var
+        Crime_Rating
+    ;
+    output
+        out=costliving_combined_temp
+    ;
+run;
+
+proc sort
+        data=costliving_combined_temp(where=(_STAT_="MEAN"))
+    ;
+    by
+        ascending Crime_Rating
+    ;
+run;
