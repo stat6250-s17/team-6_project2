@@ -36,8 +36,7 @@ title1
 ;
 
 title2
-'Rational: We can have a rough idea of the range of the rent and the tendency of
-house renting over the year.'
+'Rational: We can have a rough idea of the range of the rent and the tendency of house renting over the year.'
 ;
 
 footnote1
@@ -45,13 +44,11 @@ footnote1
 ;
 
 footnote2
-"We can conclude that Los Angels, San Francisco, Chicago are almost as expensive
-as New York to live in."
+"We can conclude that Los Angels, San Francisco, Chicago are almost as expensive as New York to live in."
 ;
 
 footnote3
-"We can see that there are several areas with extreme low rents that behaive like
-outliers."
+"We can see that there are several areas with extreme low rents that behaive like outliers."
 ;
 
 *
@@ -104,14 +101,11 @@ title1
 ;
 
 title2
-'Rational: We can then analysis the tendency of the house renting and know the 
-relationship between the location and house rent price over the years, also get 
-the overall graph of the rent.'
+'Rational: We can then analysis the tendency of the house renting and know the relationship between the location and house rent price over the years, also get the overall graph of the rent.'
 ;
 
 footnote1
-"The house renting of Los Angels, New York and Chicago increase the fastest and
-the house renting of Wichita, Aurora, Laredo increase the lowest. "
+"The house renting of Los Angels, New York and Chicago increase the fastest and the house renting of Wichita, Aurora, Laredo increase the lowest. "
 ;
 
 footnote2
@@ -164,18 +158,15 @@ title1
 ;
 
 title2
-'Rational: We can study the relationship between the location and the lowest rent 
-over the year and observe the reason behind this changed/unchanged variables.'
+'Rational: We can study the relationship between the location and the lowest rent over the year and observe the reason behind this changed/unchanged variables.'
 ;
 
 footnote1
-"Generally speaking, we can see that February, September and Novemember have the 
-lowest house renting compared to the other months."
+"Generally speaking, we can see that February, September and Novemember have the lowest house renting compared to the other months."
 ;
 
 footnote2
-"We can conclude that the months with most expensive house renting is August, 
-January and July."
+"We can conclude that the months with most expensive house renting is August, January and July."
 ;
 
 footnote3
