@@ -37,7 +37,7 @@ title2
 ;
 
 footnote1
-"Based on the above output, there are top ten highest rent price of cities that are Hanoi, Caracas, Barcelona, Montevideo, Vancouver, Tampa, Seattle, San Francisco, San Diego.'
+"Based on the above output, there are top ten highest rent price of cities that are Hanoi, Caracas, Barcelona, Montevideo, Vancouver, Tampa, Seattle, San Francisco, San Diego."
 ;
 
 footnote2
@@ -57,6 +57,7 @@ data, nor does it attempt to validate data in any way.
 Possible Follow-up Steps: More carefully clean values in order to filter out 
 any possible illegal values, and better handle missing data
 ;
+
 proc print
         noobs
         data= costliving_combined _temp(obs=10)
@@ -86,12 +87,13 @@ title2
 ;
 
 footnote1
-"."
+"Based on the above output, we can see that all the five numbers (min,q1,median,q3,max) of the non United States cities are higher than the United States cities."
 ;
 
 footnote2
-"."
+"Moreover, the other country cities actually have a higher Avg_Disposable_Income than the United States cities."
 ;
+
 
 *
 Note: This would involve making either a chart to show the disposable income 
@@ -103,8 +105,9 @@ with the variable "country", and store into a new dataset. Compute five-number
 summaries by Avg_Disposable_Income from the dataset, and output the results
  to a temporary dataset. 
 
-Limitations: This problem is straight forward, the only draw-back would be if
-the Avg Disposable Income category is not given so we can not sort them properly.
+Limitations: This problem is straight forward, the only draw-back would be
+if the Avg Disposable Income category is not given so we can not sort them
+properly.
 
 Possible Follow-up Steps: A possible follow-up to this approach could use 
 an inferential statistical technique like linear regression.
@@ -156,6 +159,7 @@ nor does it attempt to validate data in any way.
 Possible Follow-up Steps:  More carefully clean values in order to filter out 
 any possible illegal values, and better handle missing data.
 ;
+
 proc print
         noobs
         data= costliving_combined _temp(obs=10)
