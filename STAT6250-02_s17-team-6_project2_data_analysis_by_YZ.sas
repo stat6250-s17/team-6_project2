@@ -9,9 +9,11 @@ questions regarding Zillow Rent Index, the median estimated monthly rental
 price for a given area, and covers multifamily, single family, condominium, 
 and cooperative homes in Zillow’s database, regardless of whether they are 
 currently listed for rent. 
+
 Dataset Name: _analytic_file created in external file
 STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -30,8 +32,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'Research question: What are the top seven most expensive metropolitan areas to 
-live in between rentprice2015 and rentprice2016?'
+'Research question: What are the top seven most expensive metropolitan areas to live in between rentprice2015 and rentprice2016?'
 ;
 
 title2
@@ -99,9 +100,7 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: Which top 3 area obtain the house rent that increase fastest in the 
-past five years in 2015? And does the result remain the same comparing to that
-of 2016?'
+'Question: Which top 3 area obtain the house rent that increase fastest in the past five years in 2015? And does the result remain the same comparing to that of 2016?'
 ;
 
 title2
@@ -161,8 +160,7 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: What are the top five areas that decrease most in rentprice for February
-comparing from 2015 to 2016?'
+'Question: What are the top five areas that decrease most in rentprice for February comparing from 2015 to 2016?'
 ;
 
 title2
