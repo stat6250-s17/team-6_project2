@@ -49,17 +49,21 @@ exactly replicated in costlivingNZ.
 
 * environmental setup;
 
-
 * create output formats;
 
 proc format;
-        value Avg_Disposable_Income_bin
-        low-999="q1 Avg Disposable Income"
-        1000-1535="q2 Avg Disposable Income"
-        1536-2999="q3 Avg Disposable Income"
-        3000-high="q4 Avg Disposable Income"
+    value $country_bins
+        "United States"="United State"
+	other="Not_United State"
+    ;
+    value Avg_Disposable_Income
+	low-<999="Q1 Avg_Disposable_Income "
+	1000-<1535="Q2 Avg_Disposable_Income "
+	1536-<2999="Q3 Avg_Disposable_Income "
+	3000-high="Q4 Avg_Disposable_Income "
     ;
 run;
+
 
 * setup environmental parameters;
 %let inputDataset1URL =
@@ -199,6 +203,7 @@ data costliving_combined_edited;
 		Gasoline
 		Avg_Rent
 		Avg_Disposable_Income
+		Crime_Rating
 		;
 	keep
 		Country
@@ -209,6 +214,7 @@ data costliving_combined_edited;
 		Gasoline
 		Avg_Rent
 		Avg_Disposable_Income
+		Crime_Rating
 		;
 	set costliving_combined;
 run;
@@ -359,26 +365,6 @@ run;
 proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
     by 
         diffavg
-    ;
-run;
-
-* use proc sort to create a temporary sorted table in descending by
-costliving_combined;
-proc sort
-        data=Avg_rent_frequency out=Avg_rent_sorted
-    ;
-    by
-        descending Avg_Rent
-    ;
-run;
-
-* use proc sort to create a temporary sorted table in ascending by
-costliving_combined;
-proc sort
-        data=Crime_Rating_frequency out=Crime_Rating_sorted
-    ;
-    by
-        ascending Crime_Rating
     ;
 run;
 
