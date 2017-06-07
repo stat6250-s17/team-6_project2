@@ -20,7 +20,7 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset livingcost_combined;
+* load external file that generates analytic dataset cde_2014_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project2_data_preparation.sas';
 
 
@@ -33,15 +33,19 @@ title1
 ;
 
 title2
-'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that anyone who moves here will think about, because the rent would be the largest proportion of people's cost.'
+'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that anyone who moves here will think about, because the rent would be the largest proportion of people cost.'
 ;
 
 footnote1
-"Based on the above output, there are top ten highest rent price of cities that are Hanoi, Caracas, Barcelona, Montevideo, Vancouver, Tampa, Seattle, San Francisco, San Diego."
+"Based on the above output, there are top ten highest rent price of cities that are Hong Kong(China), New York(United States), Singapore(Singapore), Sydney(Australia), Geneva(Switzerland), London(United Kingdom), San Francisco(United States), Washington(United Kingdom), Zurich(Germany), Brisbane(Australia)."
 ;
 
 footnote2
-"Moreover, we can see that the top five to ten highest rent price of cities are the U.S. cities."
+"We can see that there are two American cities, two British cities and two Australian cities in the top ten highest rent list ."
+;
+
+footnote
+"Moreover, the ten cities are economically well developed cities, San Francisco ranked seventh, it led the economic development of the Bay Area."
 ;
 
 *
@@ -51,22 +55,29 @@ make a table to see the relationship.
 Methodology: Use PROC PRINT to print just the first ten observations from
 the temporary dataset created in the corresponding data-prep file.
 
-Limitations: This methodology does not account for cities with unknown
-data, nor does it attempt to validate data in any way.
+Limitations: This methodology does not show the names of country,
+nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean values in order to filter out 
-any possible illegal values, and better handle missing data
+any possible illegal values, and better handle missing data.
 ;
 
 proc print
-        noobs
-        data= costliving_combined _temp(obs=10)
+        data=Avg_Rent_sorted(obs=10)
     ;
     id
-        city_Name
+        city
     ;
     var
         Avg_rent
+    ;
+run;
+
+proc means 
+        data=Avg_Rent_sorted
+    ;
+    var
+	Avg_Rent
     ;
 run;
 
@@ -113,13 +124,25 @@ Possible Follow-up Steps: A possible follow-up to this approach could use
 an inferential statistical technique like linear regression.
 ;
 
-proc means
-        min q1 median q3 max
-        data=costliving_combined
-class 
-    country;
+proc means 
+        min q1 median q3 max 
+        data=costliving_combined noprint
+    ;
     var
         Avg_Disposable_Income
+    ;
+	output out=disposable_income_summary
+    ;
+run;
+
+proc freq 
+        data=disposable_income_analysis
+    ;
+    table 
+        country*avg_disposable_income / missing norow nocol nopercent;
+    format 
+        country $country_bins.
+	avg_disposable_income avg_disposable_income_bins.
     ;
 run;
 
@@ -135,15 +158,15 @@ title1
 'Research Question: What are the top ten the lowest crime rate of cities?'
 ;
 title2
-"Rational: Low crime rate is good. Lower crime rate makes people feel more safer. By the proportion of crime, we know which cities are more suitable for human habitation."
+'Rational: Low crime rate is good. Lower crime rate makes people feel more safer. By the proportion of crime, we know which cities are more suitable for human habitation.'
 ;
 
 footnote1
-"Based on the above output, there are top ten lowest crime rate of cities that are Malaga, Marbella, Abu Dhabi, Tokyo, Aachen, Dresden, Dusseldorf, Zurich, Taipei, Hong Kong."
+"Based on the above output, there are top ten lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
 ;
 
 footnote2
-"Moreover, we can see that the top two lowest crime rate of cities are Spain cities, and three cities are Germany."
+"Moreover, we can see that the top two lowest crime rate of cities are Spanish cities, and five German cities."
 ;
 
 *
@@ -153,7 +176,7 @@ to see the relationship.
 Methodology: Use PROC PRINT to print the first ten observations from
 the temporary dataset created in the corresponding data-prep file.
 
-Limitations: This methodology does not account for cities with missing data,
+Limitations: This methodology does not show the names of country,
 nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps:  More carefully clean values in order to filter out 
@@ -161,15 +184,20 @@ any possible illegal values, and better handle missing data.
 ;
 
 proc print
-        noobs
-        data= costliving_combined _temp(obs=10)
+        data=Crime_Rating_sorted(obs=10)
     ;
     id
-        city_Name
+        City
     ;
     var
         Crime_Rating
-;
+    ;
+run;
+
+proc means data=Crime_Rating_sorted;
+	var
+		Crime_Rating
+	;
 run;
 
 title;
