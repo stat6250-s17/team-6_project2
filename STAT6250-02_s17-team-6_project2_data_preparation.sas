@@ -54,13 +54,13 @@ exactly replicated in costlivingNZ.
 proc format;
     value $country_bins
         "United States"="United State"
-	other="Not_United State"
+	other="Not United State"
     ;
-    value Avg_Disposable_Income
-	low-<999="Q1 Avg_Disposable_Income "
-	1000-<1535="Q2 Avg_Disposable_Income "
-	1536-<2999="Q3 Avg_Disposable_Income "
-	3000-high="Q4 Avg_Disposable_Income "
+    value Avg_Disposable_Income_bins
+	low-<536="Q1 Avg_Disposable_Income "
+	537-<1535="Q2 Avg_Disposable_Income "
+	1536-<2055="Q3 Avg_Disposable_Income "
+	2056-high="Q4 Avg_Disposable_Income "
     ;
 run;
 
@@ -369,10 +369,10 @@ proc sort data=rentprice_incr_2015_2016 out=rentprice_decr_2015_2016_sort;
 run;
 
 
-*Use PROC MEANS to compute the mean of Avg_Rent for City,
-and output the results to a temporary dataset, and use PROC SORT
-to extract and sort just the means the temporary dateset,
-which will be used as part of data analysis by YY.
+*Use PROC MEANS to compute the mean of Avg_Rent and Crime_Rating for City,
+and output the results to a temporary dataset. And then,use PROC SORT
+to extract and sort the temporary dateset,which will be used as part 
+of data analysis by YY.
 ;
 proc means
         mean
@@ -384,6 +384,7 @@ proc means
     ;
     var
         Avg_Rent
+	Crime_Rating
     ;
     output
         out=costliving_combined_temp
@@ -392,37 +393,24 @@ run;
 
 proc sort
         data=costliving_combined_temp(where=(_STAT_="MEAN"))
+	out=Avg_Rent_sorted
     ;
     by
         descending Avg_Rent
     ;
 run;
 
-*Use PROC MEANS to compute the mean of Crime_Rating for City,
-and output the results to a temporary dataset, and use PROC SORT
-to extract and sort just the means the temporary dateset,
-which will be used as part of data analysis by YY.
-;
-proc means
-        mean
-        noprint
-        data=costliving_combined
+proc sort
+        data=costliving_combined_temp(where=(_STAT_="MEAN"))
+	out=Crime_Rating_sorted
     ;
-    class
-        City
-    ;
-    var
+    by
         Crime_Rating
-    ;
-    output
-        out=costliving_combined_temp
     ;
 run;
 
-proc sort
-        data=costliving_combined_temp(where=(_STAT_="MEAN"))
-    ;
-    by
-        ascending Crime_Rating
-    ;
+data disposable_income_analysis;
+	set costliving_combined;
+	keep Country Avg_disposable_income;
+	format Country country_bins.;
 run;
