@@ -26,19 +26,19 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 title1
-'What are the Top 10 US Cities that have the highest house renting from 2015 to 2016?'
+'What are the top 10 US cities that have the highest house renting from 2015 to 2016?'
 ;
 
 title2
-'Provide the rough idea of which cities, metroes, counties and states that cost most living expense.'
+'Provide the rough idea of which cities, metroes, counties and states obtain the highest living expense.'
 ;
 
 footnote1
-'Jupiter Island has the most expensive average rent from 2015-2016 at about $20,800 a month.'
+'Based on the output, we claim that Jupiter Island, Atherton, Fisher Island, Belvedere, Hidden Hills are the top 10 US cities that have the highest house renting in 2015 and 2016, which are listed from high to low in house renting.'
 ;
 
 footnote2
-'The top five cities are located in Florida and California. These cities are not well-known but are located near well-known metropolitan areas like San Francisco, Los Angeles, and Miami. '
+'The cities that obtain the highest living expense are most located in CA and FL, which is not suprised by common sense.'
 ;
 
 footnote3
@@ -47,25 +47,27 @@ footnote3
 
 *
 Question: What are the top 10 most expensive US cities (present in house renting)
-from year 2015 to 2016? Are the 5 least expensive US cities in terms of average rent 
-price? 
+from year 2015 to 2016? Does the outcome suprise you?
+
 Rationale: 
 This will help identify cities where renting may be an issue due to high demand 
 and low supply or the opposite. It will also show if there is any interesting 
 geographic insights about cities with highest rent - such as 
 coastal cities vs. inland cities.
+
 Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
 Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
 will sort the data and print only the top 5 cities by the mean variable.
 Limitations: This output will take in account the average rent price over
 a 2 year period. However, the trends could proceed additiona insights.
 This will not show if rent has been declining in certain cities.
+
 Followup Steps: Possible follow-up steps is to calculate change over month.
 Or compare the average against the last month.
 ;
 
 proc print
-        data=rentprice_sorted(obs=5)
+        data=rentprice_sorted(obs=10)
     ;
     id
         City Metro County State
