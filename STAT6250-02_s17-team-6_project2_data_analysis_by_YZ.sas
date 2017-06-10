@@ -28,19 +28,19 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'What are the Top 5 US Cities with the highest property rent price in from 2015-2016?'
+'What are the top 10 cities over the country have the highest house renting from 2015 to 2016?'
 ;
 
 title2
-'This will help identify which cities are the most expensive to live in.'
+'Provide the rough idea of which cities, metroes, counties and states that cost the highest living expense.'
 ;
 
 footnote1
-'Jupiter Island has the most expensive average rent from 2015-2016 at about $20,800 a month.'
+'Based on the output, we claim that Jupiter Isaland, Atherton, Fisher Island,Belvedere, Hidden Hills are the top 10 expensive cities to live in that ranked from high to low.'
 ;
 
 footnote2
-'The top five cities are located in Florida and California. These cities are not well-known but are located near well-known metropolitan areas like San Francisco, Los Angeles, and Miami. '
+'The areas obtaining the highest living expense located mostly in CA and FL, which is not surpurise to us by common sense becasue these states are always expensive. '
 ;
 
 footnote3
@@ -48,14 +48,14 @@ footnote3
 ;
 
 *
-Question: What are the top 5 most expensive US cities in terms of average rent 
-price in 2015-2016? Are the 5 least expensive US cities in terms of average rent 
-price? 
-Rationale: 
-This will help identify cities where renting may be an issue due to high demand 
+Question: What are the top 10 most expensive US cities in house renting 
+in year 2015 and 2016? Does the outcome surprise you?
+
+Rationale: This will help identify cities where renting may be an issue due to high demand 
 and low supply or the opposite. It will also show if there is any interesting 
 geographic insights about cities with highest rent - such as 
 coastal cities vs. inland cities.
+
 Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
 Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
 will sort the data and print only the top 5 cities by the mean variable.
@@ -67,7 +67,7 @@ Or compare the average against the last month.
 ;
 
 proc print
-        data=rentprice_sorted(obs=5)
+        data=rentprice_sorted(obs=10)
     ;
     id
         City Metro County State
@@ -82,11 +82,11 @@ footnote;
 
 
 title1
-'Average rent price for Top 5 cities with largest population'
+'Average rent price for Top 10 cities with largest population'
 ;
 
 proc print
-        data=rentprice_sort2(obs=5)
+        data=rentprice_sort2(obs=10)
     ;
     id
         City Metro County State Population_Rank
@@ -104,53 +104,55 @@ title;
 *******************************************************************************;
 
 title1
-'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
+'Research Question: What are the top five states with the lowest crime rate?'
 ;
-
 title2
-'This may reveal some interesting insight about cities where rent is more volatile and if there may be economic reasons for such.'
+'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
 ;
 
 footnote1
-'Not surprisingly, Jupiter Island once again comes out on top. This may suggest that Jupiter Island is a vacation spot and therefore experiences high and low visitation season.'
+"Based on the above output, there are top ten lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
 ;
 
 footnote2
-'All 5 of these cities upon further research are small, exclusive communities with low population but inhabited by the wealthiest people in US.'
+"Also, we can see that the first and second cities are Spanish cities, and there are five German cities(fifth to ninth) in the top ten list."
 ;
 
 footnote3
-'This could also suggest that the rent fluctuation could have something to do with the economy and how well its performing, especially since so much is dependent on the very few.'
+"Moreover, The top ten cities have much lower crime rates than average, so they are relatively safe cities."
 ;
 
+
 *
-Question: What are the top 5 cities with the highest rent flunctuation between 
-2015-2016? 
-Rationale: Rent prices fluctuates. This will help us identify communities may 
-be have seasonal factors or are more vacational cities.
-Methodology: Using Max to identify the highest rent across obsveration, min to 
-idenitfy the lowest, and calculate the difference between the max and min.
-Limitations: This output does not show which month is the max and which is the 
-min. Some cities may have a seasonal pattern different from others and this will 
-not reveal this information.
-Followup Steps: A possible follow-up is to identify the month associate with the 
-max and min rent price.
+Note: This would involve the crime rate, and then we can make a table 
+to see the relationship.
+Methodology: Use PROC PRINT to print the first ten observations from
+the temporary dataset created in the corresponding data-prep file.
+Limitations: This methodology does not show the names of country,
+nor does it attempt to validate data in any way.
+Possible Follow-up Steps:  More carefully clean values in order to filter out 
+any possible illegal values, and better handle missing data.
 ;
 
 proc print
-        data=rentprice_s1(obs=5)
+        data=Crime_Rating_sorted(obs=5)
     ;
     id
-        City Metro County State 
+        State
     ;
     var
-	maxmonth minmonth diff
+        Crime_Rating
     ;
+run;
+
+proc means data=Crime_Rating_sorted;
+	var
+		Crime_Rating
+	;
 run;
 
 title;
 footnote;
-
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
