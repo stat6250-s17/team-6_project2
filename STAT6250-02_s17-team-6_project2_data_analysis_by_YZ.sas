@@ -57,8 +57,9 @@ geographic insights about cities with highest rent - such as
 coastal cities vs. inland cities.
 
 Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
-Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
-will sort the data and print only the top 5 cities by the mean variable.
+Jan 2015 to Dec 2016 to proceed a new mean variable. By using PROC SORT,
+the top 10 expensive cities will be sorted and print by the mean variable.
+
 Limitations: This output will take in account the average rent price over
 a 2 year period. However, the trends could proceed additiona insights.
 This will not show if rent has been declining in certain cities.
@@ -106,12 +107,13 @@ title;
 title1
 'Research Question: What are the top five states with the lowest crime rate?'
 ;
+
 title2
 'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
 ;
 
 footnote1
-"Based on the above output, there are top ten lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
+"Based on the output, there are top five lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
 ;
 
 footnote2
