@@ -33,7 +33,7 @@ title1
 ;
 
 title2
-'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that most people who need to move to another city to consider，because the rent would be the largest proportion of living cost.'
+'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that most people who need to move to another city to consider,because the rent would be the largest proportion of living cost.'
 ;
 
 footnote1
