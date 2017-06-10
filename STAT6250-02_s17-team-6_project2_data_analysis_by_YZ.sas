@@ -85,112 +85,117 @@ footnote;
 *******************************************************************************;
 
 title1
-'Question: Which top 3 area obtain the house rent that increase fastest in the past five years in 2015? And does the result remain the same comparing to that of 2016?'
+'Research Question: What are the top ten the lowest crime rate of cities?'
 ;
-
 title2
-'Rational: We can then analysis the tendency of the house renting and know the relationship between the location and house rent price over the years, also get the overall graph of the rent.'
+'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
 ;
 
 footnote1
-"The house renting of Los Angels, New York and Chicago increase the fastest and the house renting of Wichita, Aurora, Laredo increase the lowest. "
+"Based on the above output, there are top ten lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
 ;
 
 footnote2
-"We can see that there are bunch of areas keeps increase in a gentle tendency."
+"Also, we can see that the first and second cities are Spanish cities, and there are five German cities(fifth to ninth) in the top ten list."
 ;
 
 footnote3
-"There are some missing values that needed to be clean out."
+"Moreover, The top ten cities have much lower crime rates than average, so they are relatively safe cities."
 ;
 
+
 *
-Note: This compares the column "city" from rentprice2015
-to the column city from rentprice2016. 
-
-Methodology: Use proc means to compute 5-number summaries of house rent for
-2015 and 2016. Then use proc format to create formatsthat bin both columns with 
-respect to the proc means output. Then use proc freq to create a cross-tab 
-of the two variables with respect to the created formats.
-
-Limitations: Even though predictive modeling is specified in the research
-questions, this methodology solely relies on a crude descriptive technique
-by looking at correlations along quartile values, which could be too coarse a
-method to find actual association between the variables.
-
-Followup Steps: A possible follow-up to this approach could use an inferential
-statistical technique like linear regression.
+Note: This would involve the crime rate, and then we can make a table 
+to see the relationship.
+Methodology: Use PROC PRINT to print the first ten observations from
+the temporary dataset created in the corresponding data-prep file.
+Limitations: This methodology does not show the names of country,
+nor does it attempt to validate data in any way.
+Possible Follow-up Steps:  More carefully clean values in order to filter out 
+any possible illegal values, and better handle missing data.
 ;
 
 proc print
-        data=rentprice_2015_analytic_file_sort_sat(obs=3)
+        data=Crime_Rating_sorted(obs=10)
     ;
     id
         City
     ;
     var
-        Population
+        Crime_Rating
     ;
+run;
+
+proc means data=Crime_Rating_sorted;
+	var
+		Crime_Rating
+	;
 run;
 
 title;
 footnote;
-
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
 title1
-'Question: What are the top five areas that decrease most in rentprice for February comparing from 2015 to 2016?'
+'Which 10 cities have had the largest increase in rent prices from 2015 to 2016?'
 ;
 
 title2
-'Rational: We can study the relationship between the location and the lowest rent over the year and observe the reason behind this changed/unchanged variables.'
+'This will help reveal economic trend for those cities - idenitfy which cities are on the rise.'
 ;
 
 footnote1
-"Generally speaking, we can see that February, September and Novemember have the lowest house renting compared to the other months."
+'Three cities in the top 5 list are located in New York, one in California, and one in Florida. All 5 cities saw an increase of well over $1,000 in average rent prices between 2015 and 2016.'
 ;
 
 footnote2
-"We can conclude that the months with most expensive house renting is August, January and July."
-;
-
-footnote3
-"There are some missing values in the xls, we need to clean out and run the code more precisely."
+'The amount of increase in rent is really startling. A follow-up is to see what cities had a decrease in average rent price.'
 ;
 
 *
-Note: This compares the column for each month from rentprice15 to the column TOTAL
-from rentprice16.
-
-Methodology: When combining rentprice15 and rentpricef16 during data preparation, 
-take the difference between house rent for each month in 2015 and TOTAL in 2016 for
-each city and create a new variable called rentprice_rate_change. Then, use proc 
-sort to create a temporary sorted table in descending by rentprice_rate_change. 
-Finally, use proc print here to display the first 12 rows of the sorted dataset.
-
-Limitations: This methodology does not account for each months' rents with missing 
-data, nor does it attempt to validate data in any way, like filtering for values
-outside of admissable values.
-
-Followup Steps: More carefully clean the values of variables so that the
-statistics computed do not include any possible illegal values, and better
-handle missing data, e.g., by using a previous year's data or a rolling average
-of previous years' data as a proxy.
+Question: Which 5 cities have had the largest increase in rent prices from 
+the two averages. Sort by the difference variable and print the top 5 cities.
+Methodology: Use proc mean to calculate the average rent price for 2015 
+and for 2016 separate. Then take the difference from 2016 and 2015. Use
+proc sort to list the cities by the largest difference in rent prices 
+between the average of 2015 and 2016.
+Limitations: This only looks at increase of price. Looking at highest decrease
+can also reveal interesting insights.
+Followup Steps: Print the highest negative difference, not only the highest 
+positive difference.
 ;
 
 proc print
-        data=cde_2016_analytic_file_sort_frpm(obs=12)
+        data=rentprice_incr_2015_2016_sort(obs=5)
     ;
     id
-        City
+        City Metro County State 
     ;
     var
-        rentprice_rate_change_2015_to_2016
+	avg2015 avg2016 diffavg
     ;
 run;
 
 title;
 footnote;
+
+title1
+'Top 10 cities with largest decrease in average rent from 2015 to 2016'
+;
+
+
+proc print
+        data=rentprice_decr_2015_2016_sort(obs=10)
+    ;
+    id
+        City Metro County State 
+    ;
+    var
+	avg2015 avg2016 diffavg
+    ;
+run;
+
+title;
