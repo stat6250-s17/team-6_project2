@@ -1,19 +1,16 @@
+231 lines (175 sloc)  7.04 KB
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
 
+
 *
 This file uses the following analytic dataset to address several research
-questions regarding Zillow Rent Index, the median estimated monthly rental 
-price for a given area, and covers multifamily, single family, condominium, 
-and cooperative homes in Zillow’s database, regardless of whether they are 
-currently listed for rent. 
-
-Dataset Name: _analytic_file created in external file
-STAT6250-02_s17-team-6_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
-
+questions regarding rental prices and living cost trends at in the US.
+Dataset Name: rentprice_combined and livingcost_combined created in 
+external file STAT6250-02_s17-team-6_project2_data_preparation.sas, which is 
+assumed to be in the same directory as this file
 See included file for dataset properties
 ;
 
@@ -23,74 +20,63 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset rentprice_2015_analytic_file;
+* load external file that generates analytic dataset cde_2014_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project2_data_preparation.sas';
-
-
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-
 title1
-'Research question: What are the top seven most expensive metropolitan areas to live in between rentprice2015 and rentprice2016?'
+'What are the Top 10 US Cities that have the highest house renting from 2015 to 2016?'
 ;
 
 title2
-'Rational: We can have a rough idea of the range of the rent and the tendency of house renting over the year.'
+'Provide the rough idea of which cities, metroes, counties and states that cost most living expense.'
 ;
 
 footnote1
-"We can see that New York City is the most expensive to live in from the output."
+'Jupiter Island has the most expensive average rent from 2015-2016 at about $20,800 a month.'
 ;
 
 footnote2
-"We can conclude that Los Angels, San Francisco, Chicago are almost as expensive as New York to live in."
+'The top five cities are located in Florida and California. These cities are not well-known but are located near well-known metropolitan areas like San Francisco, Los Angeles, and Miami. '
 ;
 
 footnote3
-"We can see that there are several areas with extreme low rents that behaive like outliers."
+'These cities are likely tiny, exclusive and highly expensive communities. A follow-up would be to look at the cities by the population ranking.'
 ;
 
 *
-Note: This compares the column "city" from price.xsl to the column of the
-same name from rentprice2016.
-
-Methodology: When combining rentprice2015 with rentprice2016 during data 
-preparation, take the difference of values of house renting for eachcity 
-and create a new variable called price_rate_change_2015_to_2016. Then,
-use proc sort to create a temporary sorted table in descending by
-price_rate_change_2015_to_2016. Finally, use proc print here to display the
-first five rows of the sorted dataset.
-
-Limitations: This methodology does not account for cities with missing data,
-nor does it attempt to validate data in any way, like filtering for percentages
-between 0 and 1.
-
-Followup Steps: More carefully clean values in order to filter out any possible
-illegal values, and better handle missing data, e.g., by using a previous year's
-data or a rolling average of previous years' data as a proxy.
+Question: What are the top 10 most expensive US cities (present in house renting)
+from year 2015 to 2016? Are the 5 least expensive US cities in terms of average rent 
+price? 
+Rationale: 
+This will help identify cities where renting may be an issue due to high demand 
+and low supply or the opposite. It will also show if there is any interesting 
+geographic insights about cities with highest rent - such as 
+coastal cities vs. inland cities.
+Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
+Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
+will sort the data and print only the top 5 cities by the mean variable.
+Limitations: This output will take in account the average rent price over
+a 2 year period. However, the trends could proceed additiona insights.
+This will not show if rent has been declining in certain cities.
+Followup Steps: Possible follow-up steps is to calculate change over month.
+Or compare the average against the last month.
 ;
 
-proc freq
-        data=rentprice_2015_analytic_file
+proc print
+        data=rentprice_sorted(obs=5)
     ;
-    table
-            Rentprice_FRPM_2016
-            *rentprice2015
-            / missing norow nocol nopercent
+    id
+        City Metro County State
     ;
-        where
-            not(missing(rentprice2015))
-    ;
-    format
-        Rentprice_2015 Percent_Rentprice_2016_bins.
-        PCTGE1500 PCTGE1500_bins.
+    var
+        average
     ;
 run;
 
 title;
 footnote;
-
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
