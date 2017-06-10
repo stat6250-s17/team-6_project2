@@ -33,7 +33,7 @@ title1
 ;
 
 title2
-'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that most people who need to move to another city to consider,because the rent would be the largest proportion of living cost.'
+'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that most people who need to move to another city to consider, because the rent would be the largest proportion of living cost.'
 ;
 
 footnote1
@@ -130,7 +130,7 @@ an inferential statistical technique like linear regression.
 
 proc means 
         min q1 median q3 max 
-        data=costliving_combined noprint
+        data=costliving_combined
     ;
     var
         Avg_Disposable_Income
