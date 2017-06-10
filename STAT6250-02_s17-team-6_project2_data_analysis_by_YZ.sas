@@ -109,11 +109,11 @@ title1
 ;
 
 title2
-'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
+'Rationale: Provide the top5 safest states for living.'
 ;
 
 footnote1
-"Based on the output, there are top five lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
+"Based on the output, the are top five states with the lowest crime rate of are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
 ;
 
 footnote2
@@ -126,12 +126,14 @@ footnote3
 
 
 *
-Note: This would involve the crime rate, and then we can make a table 
-to see the relationship.
-Methodology: Use PROC PRINT to print the first ten observations from
+Note: This research question could provide a rough idea of which cities
+are most suitable for living based on the factor of safety.
+
+Methodology: Use PROC PRINT to print the first five observations from
 the temporary dataset created in the corresponding data-prep file.
-Limitations: This methodology does not show the names of country,
-nor does it attempt to validate data in any way.
+
+Limitations: This methodology does not deal with the missing values.
+
 Possible Follow-up Steps:  More carefully clean values in order to filter out 
 any possible illegal values, and better handle missing data.
 ;
