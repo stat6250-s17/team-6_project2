@@ -44,7 +44,7 @@ footnote2
 ;
 
 footnote3
-'These cities are likely tiny, exclusive and highly expensive communities. A follow-up would be to look at the cities by the population ranking.'
+'Some of these cities names sound like small island that are not familar to me, but all of them locate near huge cities with large population.'
 ;
 
 *
@@ -134,8 +134,8 @@ the temporary dataset created in the corresponding data-prep file.
 
 Limitations: This methodology does not deal with the missing values.
 
-Possible Follow-up Steps:  More carefully clean values in order to filter out 
-any possible illegal values, and better handle missing data.
+Possible Follow-up Steps:  More carefully clean out missing values or
+deal with the unnecessary columns for our prediction.
 ;
 
 proc print
@@ -181,13 +181,16 @@ footnote2
 *
 Question: Which 5 cities have had the largest increase in rent prices from 
 the two averages. Sort by the difference variable and print the top 5 cities.
+
 Methodology: Use proc mean to calculate the average rent price for 2015 
 and for 2016 separate. Then take the difference from 2016 and 2015. Use
-proc sort to list the cities by the largest difference in rent prices 
+proc sort to list the cities by the largest difference in rent prices
 between the average of 2015 and 2016.
+
 Limitations: This only looks at increase of price. Looking at highest decrease
 can also reveal interesting insights.
-Followup Steps: Print the highest negative difference, not only the highest 
+
+Followup Steps: Print out the highest negative difference, not only the highest 
 positive difference.
 ;
 
