@@ -44,7 +44,7 @@ footnote2
 ;
 
 footnote3
-'Some of these cities names sound like small island that are not familar to me, but all of them locate near huge cities with large population.'
+'Some of these cities names sound like small islands that are not familar to me, but all of them locate near huge cities with large population.'
 ;
 
 *
@@ -105,23 +105,23 @@ title;
 *******************************************************************************;
 
 title1
-'Research Question: What are the top five states with the lowest crime rate?'
+'Research Question: What are the top five cities with the lowest crime rate?'
 ;
 
 title2
-'Rationale: Provide the top5 safest states for living.'
+'Rationale: Provide the top5 safest cities for living.'
 ;
 
 footnote1
-"Based on the output, the are top five states with the lowest crime rate of are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
+"Based on the output, the are top five cities with the lowest crime rate are Malaga, Marbella, Abu Dhabi, Tokyo and Aachen."
 ;
 
 footnote2
-"Also, we can see that the first and second cities are Spanish cities, and there are five German cities(fifth to ninth) in the top ten list."
+"The safest cities are locate in Spain, German and Tokyo."
 ;
 
 footnote3
-"Moreover, The top ten cities have much lower crime rates than average, so they are relatively safe cities."
+"Also, these safe places are also not cheap to live."
 ;
 
 
@@ -142,7 +142,7 @@ proc print
         data=Crime_Rating_sorted(obs=5)
     ;
     id
-        State
+        City
     ;
     var
         Crime_Rating
@@ -163,24 +163,28 @@ footnote;
 *******************************************************************************;
 
 title1
-'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
+'Which ten cities have the largest increase in house renting from 2015 to 2016?'
 ;
 
 title2
-'This will help reveal economic trend for those cities - idenitfy which cities are on the rise.'
+'Provide the house renting tendency in these ten cities.'
 ;
 
 footnote1
-'Three cities in the top 5 list are located in New York, one in California, and one in Florida. All 5 cities saw an increase of well over $1,000 in average rent prices between 2015 and 2016.'
+'Most cities that obtaining a sharp increase in house renting located in California and New York, which is reasonble and predictable for us.'
 ;
 
 footnote2
-'The amount of increase in rent is really startling. A follow-up is to see what cities had a decrease in average rent price.'
+'The increased house renting in these cities are quite large, more investigate should be applied to see what factors cause this phenomenon.'
+;
+
+footnote3
+'Also evaluate the top 10 cities that decrease most in house renting from 2015 to 2016, check the output to see if it is reasonable.'
 ;
 
 *
-Question: Which 5 cities have had the largest increase in rent prices from 
-the two averages. Sort by the difference variable and print the top 5 cities.
+Question: Which ten cities have the largest increase in house renting from 
+the two averages. Sort by the difference variable and print out the ten cities.
 
 Methodology: Use proc mean to calculate the average rent price for 2015 
 and for 2016 separate. Then take the difference from 2016 and 2015. Use
@@ -190,12 +194,12 @@ between the average of 2015 and 2016.
 Limitations: This only looks at increase of price. Looking at highest decrease
 can also reveal interesting insights.
 
-Followup Steps: Print out the highest negative difference, not only the highest 
-positive difference.
+Followup Steps: I also print out the highest negative difference among those
+ten cities.
 ;
 
 proc print
-        data=rentprice_incr_2015_2016_sort(obs=5)
+        data=rentprice_incr_2015_2016_sort(obs=10)
     ;
     id
         City Metro County State 
@@ -209,7 +213,7 @@ title;
 footnote;
 
 title1
-'Top 5 cities with largest decrease in average rent from 2015 to 2016'
+'Top 10 cities with largest decrease in average rent from 2015 to 2016'
 ;
 
 
