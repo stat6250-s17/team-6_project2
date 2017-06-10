@@ -1,4 +1,3 @@
-231 lines (175 sloc)  7.04 KB
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
@@ -22,23 +21,26 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 * load external file that generates analytic dataset cde_2014_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project2_data_preparation.sas';
+
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
+
 title1
-'What are the top 10 US cities that have the highest house renting from 2015 to 2016?'
+'What are the Top 5 US Cities with the highest property rent price in from 2015-2016?'
 ;
 
 title2
-'Provide the rough idea of which cities, metroes, counties and states obtain the highest living expense.'
+'This will help identify which cities are the most expensive to live in.'
 ;
 
 footnote1
-'Based on the output, we claim that Jupiter Island, Atherton, Fisher Island, Belvedere, Hidden Hills are the top 10 US cities that have the highest house renting in 2015 and 2016, which are listed from high to low in house renting.'
+'Jupiter Island has the most expensive average rent from 2015-2016 at about $20,800 a month.'
 ;
 
 footnote2
-'The cities that obtain the highest living expense are most located in CA and FL, which is not suprised by common sense.'
+'The top five cities are located in Florida and California. These cities are not well-known but are located near well-known metropolitan areas like San Francisco, Los Angeles, and Miami. '
 ;
 
 footnote3
@@ -46,28 +48,26 @@ footnote3
 ;
 
 *
-Question: What are the top 10 most expensive US cities (present in house renting)
-from year 2015 to 2016? Does the outcome suprise you?
-
+Question: What are the top 5 most expensive US cities in terms of average rent 
+price in 2015-2016? Are the 5 least expensive US cities in terms of average rent 
+price? 
 Rationale: 
 This will help identify cities where renting may be an issue due to high demand 
 and low supply or the opposite. It will also show if there is any interesting 
 geographic insights about cities with highest rent - such as 
 coastal cities vs. inland cities.
-
 Methodology: I will use PROC MEAN to calculate the mean of rent prices from 
 Jan 2015 to Dec 2016 to proceed a new mean variable. Then using PROC SORT, I 
 will sort the data and print only the top 5 cities by the mean variable.
 Limitations: This output will take in account the average rent price over
 a 2 year period. However, the trends could proceed additiona insights.
 This will not show if rent has been declining in certain cities.
-
 Followup Steps: Possible follow-up steps is to calculate change over month.
 Or compare the average against the last month.
 ;
 
 proc print
-        data=rentprice_sorted(obs=10)
+        data=rentprice_sorted(obs=5)
     ;
     id
         City Metro County State
@@ -79,6 +79,25 @@ run;
 
 title;
 footnote;
+
+
+title1
+'Average rent price for Top 5 cities with largest population'
+;
+
+proc print
+        data=rentprice_sort2(obs=5)
+    ;
+    id
+        City Metro County State Population_Rank
+    ;
+    var
+	average
+    ;
+run;
+
+title;
+
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -135,12 +154,13 @@ run;
 title;
 footnote;
 
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
 title1
-'Which 10 cities have had the largest increase in rent prices from 2015 to 2016?'
+'Which 5 cities have had the largest increase in rent prices from 2015 to 2016?'
 ;
 
 title2
@@ -183,7 +203,7 @@ title;
 footnote;
 
 title1
-'Top 10 cities with largest decrease in average rent from 2015 to 2016'
+'Top 5 cities with largest decrease in average rent from 2015 to 2016'
 ;
 
 
@@ -199,3 +219,4 @@ proc print
 run;
 
 title;
+footnote;
