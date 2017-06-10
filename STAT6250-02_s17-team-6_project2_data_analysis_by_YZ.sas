@@ -104,51 +104,48 @@ title;
 *******************************************************************************;
 
 title1
-'Research Question: What are the top ten the lowest crime rate of cities?'
+'Whare are the Top 5 Cities in the US with the largest rent fluctuation between 2015-2016.'
 ;
+
 title2
-'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
+'This may reveal some interesting insight about cities where rent is more volatile and if there may be economic reasons for such.'
 ;
 
 footnote1
-"Based on the above output, there are top ten lowest crime rate of cities that are Malaga(Spain), Marbella(Spain), Abu Dhabi(United Arab Emirates), Tokyo(Japan), Aachen(Germany), Dresden(Germany), Dusseldorf(Germany), Munich(Germany), Zurich(Germany), Taipei(Taiwan)."
+'Not surprisingly, Jupiter Island once again comes out on top. This may suggest that Jupiter Island is a vacation spot and therefore experiences high and low visitation season.'
 ;
 
 footnote2
-"Also, we can see that the first and second cities are Spanish cities, and there are five German cities(fifth to ninth) in the top ten list."
+'All 5 of these cities upon further research are small, exclusive communities with low population but inhabited by the wealthiest people in US.'
 ;
 
 footnote3
-"Moreover, The top ten cities have much lower crime rates than average, so they are relatively safe cities."
+'This could also suggest that the rent fluctuation could have something to do with the economy and how well its performing, especially since so much is dependent on the very few.'
 ;
 
-
 *
-Note: This would involve the crime rate, and then we can make a table 
-to see the relationship.
-Methodology: Use PROC PRINT to print the first ten observations from
-the temporary dataset created in the corresponding data-prep file.
-Limitations: This methodology does not show the names of country,
-nor does it attempt to validate data in any way.
-Possible Follow-up Steps:  More carefully clean values in order to filter out 
-any possible illegal values, and better handle missing data.
+Question: What are the top 5 cities with the highest rent flunctuation between 
+2015-2016? 
+Rationale: Rent prices fluctuates. This will help us identify communities may 
+be have seasonal factors or are more vacational cities.
+Methodology: Using Max to identify the highest rent across obsveration, min to 
+idenitfy the lowest, and calculate the difference between the max and min.
+Limitations: This output does not show which month is the max and which is the 
+min. Some cities may have a seasonal pattern different from others and this will 
+not reveal this information.
+Followup Steps: A possible follow-up is to identify the month associate with the 
+max and min rent price.
 ;
 
 proc print
-        data=Crime_Rating_sorted(obs=10)
+        data=rentprice_s1(obs=5)
     ;
     id
-        City
+        City Metro County State 
     ;
     var
-        Crime_Rating
+	maxmonth minmonth diff
     ;
-run;
-
-proc means data=Crime_Rating_sorted;
-	var
-		Crime_Rating
-	;
 run;
 
 title;
@@ -219,4 +216,3 @@ proc print
 run;
 
 title;
-footnote;
