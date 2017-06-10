@@ -33,18 +33,18 @@ title1
 ;
 
 title2
-'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that anyone who moves here will think about, because the rent would be the largest proportion of people cost.'
+'Rationale: This should help identify the highest rent price of cities. The rent price is the first thing that most people who need to move to another city to consider，because the rent would be the largest proportion of living cost.'
 ;
 
 footnote1
-"Based on the above output, there are top ten highest rent price of cities that are Hong Kong(China), New York(United States), Singapore(Singapore), Sydney(Australia), Geneva(Switzerland), London(United Kingdom), San Francisco(United States), Washington(United Kingdom), Zurich(Germany), Brisbane(Australia)."
+"Based on the above output, there are ten cities with the highest rent, that are Hong Kong(China), New York(United States), Singapore(Singapore), Sydney(Australia), Geneva(Switzerland), London(United Kingdom), San Francisco(United States), Washington(United Kingdom), Zurich(Germany), Brisbane(Australia)."
 ;
 
 footnote2
-"We can see that there are two American cities, two British cities and two Australian cities in the top ten highest rent list ."
+"We can see that there are two American cities, two British cities and two Australian cities in the top ten highest rent list."
 ;
 
-footnote
+footnote3
 "Moreover, the ten cities are economically well developed cities, San Francisco ranked seventh, it led the economic development of the Bay Area."
 ;
 
@@ -90,7 +90,7 @@ footnote;
 *******************************************************************************;
 
 title1
-'Research Question: Does the United States cities have a higher Avg_Disposable_Income than other country cities?'
+'Research Question: Do the United States cities have a higher Avg_Disposable_Income than other country cities?'
 ;
 
 title2
@@ -98,23 +98,27 @@ title2
 ;
 
 footnote1
-"Based on the above output, we can see that all the five numbers (min,q1,median,q3,max) of the non United States cities are higher than the United States cities."
+"Based on the above output, we can see that all the five numbers(min, q1, median, q3, max), and the IQR."
 ;
 
 footnote2
-"Moreover, the other country cities actually have a higher Avg_Disposable_Income than the United States cities."
+"All of the United States are in the Q3 and Q4 Avg_Disposable_Income levels."
+;
+
+footnote3
+"Moreover, the United States cities actually have a higher Avg_Disposable_Income than others."
 ;
 
 
 *
-Note: This would involve making either a chart to show the disposable income 
-of the United States cities.
+Note: This would involve making either a chart to show levels of disposable
+income of the United States cities.
 
 Methodology: Use Proc Format to categorize the variable "country" into two 
 groups, "USA" and "Not_USA". Use a data procedure to associate the new format 
 with the variable "country", and store into a new dataset. Compute five-number
 summaries by Avg_Disposable_Income from the dataset, and output the results
- to a temporary dataset. 
+to a temporary dataset. 
 
 Limitations: This problem is straight forward, the only draw-back would be
 if the Avg Disposable Income category is not given so we can not sort them
@@ -158,7 +162,7 @@ title1
 'Research Question: What are the top ten the lowest crime rate of cities?'
 ;
 title2
-'Rational: Low crime rate is good. Lower crime rate makes people feel more safer. By the proportion of crime, we know which cities are more suitable for human habitation.'
+'Rationale: Low crime rate is good. Lower crime rate give people more sense of security. By the crime rate, we know which cities are safer and suitable for human habitation.'
 ;
 
 footnote1
@@ -166,8 +170,13 @@ footnote1
 ;
 
 footnote2
-"Moreover, we can see that the top two lowest crime rate of cities are Spanish cities, and five German cities."
+"Also, we can see that the first and second cities are Spanish cities, and there are five German cities(fifth to ninth) in the top ten list."
 ;
+
+footnote3
+"Moreover, The top ten cities have much lower crime rates than average, so they are relatively safe cities."
+;
+
 
 *
 Note: This would involve the crime rate, and then we can make a table 
