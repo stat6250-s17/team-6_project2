@@ -36,7 +36,7 @@ title2
 ;
 
 footnote1
-'Based on the output, we claim that Jupiter Isaland, Atherton, Fisher Island,Belvedere, Hidden Hills are the top 10 expensive cities to live in that ranked from high to low.'
+'Based on the output, we claim that Jupiter Isaland, Atherton, Fisher Island,Belvedere, Hidden Hills, Rolling Hills, Hillsborough, Westtlake, Portola Valley, Los Altos Hills are the top 10 expensive cities to live in that ranked from high to low.'
 ;
 
 footnote2
@@ -171,7 +171,7 @@ title2
 ;
 
 footnote1
-'Most cities that obtaining a sharp increase in house renting located in California and New York, which is reasonble and predictable for us.'
+'Most cities that obtaining a sharp increase in house renting located in California, Seattle and New York, which is reasonble and predictable for us.'
 ;
 
 footnote2
