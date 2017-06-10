@@ -102,11 +102,11 @@ footnote1
 ;
 
 footnote2
-"All of the United States are in the Q3 and Q4 Avg_Disposable_Income levels."
+"The average disposable income of all the US cities is higher than the median,All the US citis are in the Q3 and Q4 Avg_Disposable_Income levels."
 ;
 
 footnote3
-"Moreover, the United States cities actually have a higher Avg_Disposable_Income than others."
+"Moreover, the United States cities actually have a higher Avg_Disposable_Income than most of the other cities."
 ;
 
 
