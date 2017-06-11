@@ -109,7 +109,7 @@ title1
 ;
 
 title2
-'Rationale: Provide the top5 safest cities for living.'
+'Provide the top5 safest cities for living.'
 ;
 
 footnote1
@@ -117,11 +117,11 @@ footnote1
 ;
 
 footnote2
-"The safest cities are locate in Spain, German and Tokyo."
+"The safest cities are locate in Spain, German and Japan."
 ;
 
 footnote3
-"Also, these safe places are also not cheap to live."
+"Later will explore the correlation between these safe cities and their house renting to see if they are positive related."
 ;
 
 
